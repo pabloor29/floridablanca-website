@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 function IntroVins() {
@@ -5,9 +6,9 @@ function IntroVins() {
     <div className="w-full bg-[#002E6D] flex justify-center items-center py-16 mb-20">
       <div className="w-2/5 relative flex justify-center items-center">
         <img
-          src="/wine-example.webp"
+          src="/wine_poulpe.png"
           alt=""
-          className="absolute rotate-[30deg] -right-16 drop-shadow-md z-30"
+          className="absolute w-2/3 rotate-[30deg] drop-shadow-md z-30"
         />
       </div>
       <div className="w-3/5 flex flex-col space-y-8">

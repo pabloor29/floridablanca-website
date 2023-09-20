@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { AlignJustify } from "lucide-react";
 import {
@@ -8,6 +10,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import Link from "next/link";
+import { Variants, motion } from "framer-motion";
 
 const links = [
   {
@@ -32,10 +35,32 @@ const links = [
   },
 ];
 
+const Variants: Variants = {
+  hidden: {
+    y: -100,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      duration: 3,
+      delay: 0.5,
+    },
+  },
+};
+
 function Navbar() {
   return (
     <nav className="w-full">
-      <div className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#002E6D]/80 hidden lg:flex">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "30%" }}
+        variants={Variants}
+        className="fixed w-full h-16 backdrop-blur justify-between items-center text-white px-8 z-50 bg-[#002E6D]/80 hidden lg:flex"
+      >
         <a href="/" className="h-14 w-14">
           <img src="/logo-white.png" alt="logo de floridablanca" />
         </a>
@@ -57,7 +82,7 @@ function Navbar() {
         >
           RESERVATION
         </Link>
-      </div>
+      </motion.div>
 
       <div className="lg:hidden fixed left-6 top-6 z-50">
         <Sheet key="left">

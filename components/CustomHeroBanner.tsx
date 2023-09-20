@@ -1,4 +1,21 @@
+"use client";
+import { Variants, motion } from "framer-motion";
 import React from "react";
+
+const textVariants: Variants = {
+  hidden: {
+    y: 100,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      duration: 1,
+    },
+  },
+};
 
 function CustomHeroBanner(props: any) {
   return (
@@ -11,12 +28,16 @@ function CustomHeroBanner(props: any) {
       />
 
       <div className="relative z-20 h-full flex flex-col items-center justify-center leading-none">
-        <h1
+        <motion.h1
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={textVariants}
           className="text-bigSM lg:text-bigLG text-white font-spaceTransit
             tracking-wide z-30 drop-shadow-[5px_5px_0_#00A6E6]"
         >
           {props.title}
-        </h1>
+        </motion.h1>
       </div>
     </div>
   );

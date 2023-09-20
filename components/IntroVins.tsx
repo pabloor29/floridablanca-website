@@ -23,7 +23,7 @@ function IntroVins() {
         </article>
 
         <button className="bg-white hover:bg-[#002E6D] border hover:border-white text-[#002E6D] hover:text-white w-fit duration-200 px-4 py-2 z-40">
-          Notre collection de vins
+          Nos vins
         </button>
       </div>
 

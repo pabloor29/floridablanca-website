@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function IntroRestaurant() {
@@ -5,7 +6,7 @@ function IntroRestaurant() {
     <div className="bg-[#F0F5FF] flex justify-center items-center py-32 border-b-2 border-[#002E6D]">
       <div className="w-3/5 flex justify-center items-center space-x-20">
         <div className="w-1/2">
-          <img src="/moules.png" alt="" />
+          <img src="/octopus-drawing-blue.png" alt="" className="-scale-x-100"/>
         </div>
         <div className="w-1/2 flex flex-col space-y-8">
           <h3 className="text-[#002E6D] text-5xl font-medium font-spaceTransit">
@@ -18,9 +19,9 @@ function IntroRestaurant() {
             aspernatur nostrum, et iste deleniti unde accusantium. Eum
             doloremque minima omnis atque ratione repudiandae?
           </article>
-          <button className="bg-[#002E6D] hover:bg-transparent border hover:border-[#002E6D] text-white font-medium hover:text-[#002E6D] w-fit duration-200 px-4 py-3">
+          <Link href="/apropos" className="bg-[#002E6D] hover:bg-transparent border hover:border-[#002E6D] text-white font-medium hover:text-[#002E6D] w-fit duration-200 px-4 py-3">
             Notre histoire
-          </button>
+          </Link>
         </div>
       </div>
     </div>

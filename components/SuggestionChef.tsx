@@ -1,5 +1,6 @@
 import React from "react";
 import PlatSuggest from "./PlatSuggest";
+import Link from "next/link";
 
 function SuggestionChef() {
   return (
@@ -24,9 +25,9 @@ function SuggestionChef() {
           <PlatSuggest src="/casserole_3fritures.png" alt="casserole trois fritures" title="CASSEROLLE AUX FRITURES"/>
 
         </div>
-        <button className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] font-medium hover:text-white w-fit duration-200 px-4 py-2">
+        <Link href="/menu" className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] font-medium hover:text-white w-fit duration-200 px-4 py-2">
           Découvrir le menu
-        </button>
+        </Link>
       </div>
     </div>
   );

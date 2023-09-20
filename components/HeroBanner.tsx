@@ -11,19 +11,19 @@ function HeroBanner() {
       />
       <div className="relative z-20 flex flex-col items-center justify-center leading-none">
         <h1
-          className="text-[200px] text-white font-spaceTransit
+          className="text-[250px] text-white font-spaceTransit
             tracking-wide z-30"
         >
           FLORIDABLANCA
         </h1>
         <h1
-          className="text-[200px] text-[#00A6E6] top-2 left-1 absolute font-spaceTransit
+          className="text-[250px] text-[#00A6E6] top-2 left-1 absolute font-spaceTransit
             tracking-wide"
         >
           FLORIDABLANCA
         </h1>
-        <h3 className="z-10 text-white font-spaceTransit text-5xl">
-          Bar a Poulpe
+        <h3 className="z-10 text-white/90 font-spaceTransit text-5xl">
+        Bar a poulpe. Tapas maison avec vins Espagnols et regionaux.
         </h3>
       </div>
     </div>

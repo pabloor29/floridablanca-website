@@ -25,7 +25,7 @@ const links = [
 
 function Navbar() {
   return (
-    <div className="fixed w-full h-16 backdrop-blur flex justify-between items-center text-white font-semibold px-8 z-50">
+    <div className="fixed w-full h-16 backdrop-blur flex justify-between items-center text-white px-8 z-50 bg-[#002E6D]/80">
       <a href="/" className="h-14 w-14">
         <img src="/logo-white.png" alt="logo de floridablanca" />
       </a>

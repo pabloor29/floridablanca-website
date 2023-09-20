@@ -1,6 +1,12 @@
 import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Banknote, CreditCard, Coins } from "lucide-react";
 import React from "react";
 
@@ -28,15 +34,44 @@ function ContactPage() {
               <div className="text-[#002E6D] flex flex-col space-y-3">
                 <p>Modes de paiment</p>
                 <div className="flex items-center space-x-10">
-                  <div className="scale-125">
-                    <CreditCard />
-                  </div>
-                  <div className="scale-125">
-                    <Banknote />
-                  </div>
-                  <div className="scale-125">
-                    <Coins />
-                  </div>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="scale-125">
+                          <CreditCard />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Carte de crédit</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="scale-125">
+                          <Banknote />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Chèques bancaires et postaux</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="scale-125">
+                          <Coins />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Espèces</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </div>
               </div>
 

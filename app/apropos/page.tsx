@@ -38,7 +38,7 @@ function AboutPage() {
         </div>
       </div>
 
-      <div className="relative bg-gradient-to-t from-[#000e21] to-[#295DA6] flex justify-center items-center py-20">
+      <div className="relative bg-gradient-to-t from-[#000e21] to-[#295DA6] flex justify-center items-center py-20 text-white">
         <div
           className="
       absolute

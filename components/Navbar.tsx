@@ -50,7 +50,7 @@ function Navbar() {
             ))}
           </li>
         </div>
-        <div className="px-3 py-1 bg-white/5 hover:bg-white cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-4xl tracking-wide">
+        <div className="px-3 bg-white/5 hover:bg-white cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-3xl tracking-wide">
           RESERVATION
         </div>
       </div>

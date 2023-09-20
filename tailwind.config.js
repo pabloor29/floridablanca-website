@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     fontSize: {
       bigLG: '15vw',
-      bigSM: '25vw',
+      bigSM: '32vw',
       
       sm: '0.8rem',
       base: '1rem',

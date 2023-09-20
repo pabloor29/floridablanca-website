@@ -15,15 +15,15 @@ function ContactPage() {
     <>
       <Navbar />
       <CustomHeroBanner title="Contact" />
-      <div className="flex justify-center items-center space-x-8">
-        <div className="w-1/2 py-16 pl-16 space-y-8 flex flex-col items-center justify-center">
+      <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-8">
+        <div className="lg:w-1/2 py-16 lg:pl-16 space-y-8 flex flex-col items-center justify-center">
           <h3 className="z-10 text-[#002E6D] font-spaceTransit text-8xl tracking-wide">
             Floridablanca
           </h3>
 
-          <div className="flex items-center justify-between space-x-16">
-            <div className="flex flex-col justify-between space-y-12">
-              <div className="text-[#002E6D] flex flex-col space-y-3">
+          <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-16">
+            <div className="flex flex-col justify-between items-center space-y-12">
+              <div className="text-[#002E6D] flex flex-col space-y-3 items-center lg:items-start justify-center">
                 <h4 className="underline">
                   22, rue Trivalle 11000 CARCASSONNE
                 </h4>
@@ -31,7 +31,7 @@ function ContactPage() {
                 <a href="">Mobile : +33 6 34 29 48 74</a>
               </div>
 
-              <div className="text-[#002E6D] flex flex-col space-y-3">
+              <div className="text-[#002E6D] w-full flex flex-col space-y-3 items-center lg:items-start justify-center">
                 <p>Modes de paiment</p>
                 <div className="flex items-center space-x-10">
                   <TooltipProvider>
@@ -75,7 +75,7 @@ function ContactPage() {
                 </div>
               </div>
 
-              <div className="text-[#002E6D] flex flex-col space-y-3">
+              <div className="text-[#002E6D] flex w-full flex-col justify-center items-center lg:items-start space-y-3">
                 <p>Animaux acceptés</p>
                 <p>Accès Internet Wifi</p>
                 <p>🇬🇧 Anglais</p>
@@ -109,7 +109,7 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="w-1/2">
+        <div className="lg:w-1/2">
           <img
             src="/floridablanca-map.png"
             alt="carte google map Floridablanca à Carcassonne"

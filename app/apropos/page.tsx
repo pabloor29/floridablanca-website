@@ -11,19 +11,19 @@ function AboutPage() {
       <CustomHeroBanner title="Presentation" />
 
       <div className="flex justify-center items-center py-32 z-30">
-        <div className="w-3/5 flex justify-center items-center space-x-20">
-          <div className="w-1/2 z-30">
+        <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
+          <div className="lg:w-1/2 w-5/6 z-30">
             <img
               src="/worker.png"
               alt=""
-              className="shadow-[-25px_25px_0_0_#002E6D] duration-200 z-30"
+              className="shadow-[-25px_25px_0_0_#002E6D] z-30"
             />
           </div>
-          <div className="w-1/2 flex flex-col space-y-8">
+          <div className="lg:w-1/2 flex flex-col lg:space-y-8">
             <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
               le chef JEAN-LOUP
             </h3>
-            <article className="text-[#274b7e]">
+            <article className="text-[#274b7e] text-justify lg:text-left">
               Le Floridablanca a ouvert ses portes en 2017, rue trivalle, à
               mi-chemin entre la Bastide et la Cité Médiévale. Jean-Loup,
               affable, régale sa clientèle, qui mêle tout autant de touristes
@@ -73,14 +73,14 @@ function AboutPage() {
 
         <Bubble />
 
-        <div className="w-3/5 flex flex-col justify-center items-center space-y-20">
-          <h3 className="text-7xl font-medium font-spaceTransit w-full text-center">
+        <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20">
+          <h3 className="text-7xl font-spaceTransit w-full text-center">
             Trois salles, trois ambiances...
           </h3>
           <div className="flex flex-col space-y-44">
-            <div className="flex justify-center items-center space-x-20">
-              <div className="w-1/3 flex flex-col space-y-8 text-right">
-                <h3 className="text-5xl font-medium font-spaceTransit">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+              <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
+                <h3 className="leaning-none text-5xl font-medium font-spaceTransit">
                   La terrasse
                 </h3>
                 <article>
@@ -91,7 +91,7 @@ function AboutPage() {
                   reprehenderit!
                 </article>
               </div>
-              <div className="w-2/3">
+              <div className="lg:w-2/3">
                 <img
                   src="/moules.png"
                   alt=""
@@ -100,15 +100,15 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center space-x-20">
-              <div className="w-2/3">
+            <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+              <div className="lg:w-2/3">
                 <img
                   src="/moules.png"
                   alt=""
                   className="-rotate-3 shadow-md hover:scale-105 duration-300"
                 />
               </div>
-              <div className="w-1/3 flex flex-col space-y-8">
+              <div className="lg:w-1/3 flex flex-col space-y-8 text-center lg:text-left">
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   La salle du bar-restaurant
                 </h3>
@@ -122,8 +122,8 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center space-x-20">
-              <div className="w-1/3 flex flex-col space-y-8 text-right">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+              <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   Le patio
                 </h3>
@@ -135,7 +135,7 @@ function AboutPage() {
                   reprehenderit!
                 </article>
               </div>
-              <div className="w-2/3">
+              <div className="lg:w-2/3">
                 <img
                   src="/moules.png"
                   alt=""
@@ -145,8 +145,6 @@ function AboutPage() {
             </div>
           </div>
         </div>
-
-        <div className=""></div>
       </div>
 
       <Footer />

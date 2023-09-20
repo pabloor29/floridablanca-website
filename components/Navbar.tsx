@@ -43,22 +43,22 @@ function Navbar() {
             {links.map((link) => (
               <a
                 href={link.href}
-                className="border-b-[1px] border-transparent hover:border-b-[1px] hover:border-white font-spaceTransit text-4xl tracking-wide"
+                className="border-b-[1px] border-transparent leading-none hover:border-b-[1px] hover:border-white font-spaceTransit text-4xl tracking-wide"
               >
                 {link.label}
               </a>
             ))}
           </li>
         </div>
-        <div className="px-3 bg-white/5 hover:bg-white cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-3xl tracking-wide">
+        <div className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-4xl tracking-wide">
           RESERVATION
         </div>
       </div>
 
-      <div className="lg:hidden fixed right-6 top-6 z-50">
-        <Sheet key="top">
-          <SheetTrigger>
-            <AlignJustify className="scale-150 mix-blend-difference" />
+      <div className="lg:hidden fixed left-6 top-6 z-50">
+        <Sheet key="left">
+          <SheetTrigger className="overflow-hidden">
+            <AlignJustify className="scale-150" />
           </SheetTrigger>
           <SheetContent className="bg-[#002E6D]">
             <SheetHeader>
@@ -67,7 +67,7 @@ function Navbar() {
                   <a
                     key={items.label}
                     href={items.href}
-                    className="h-20 w-4/5 flex items-center text-white hover:bg-[#274b7e] duration-300 px-5 py-3 cursor-pointer"
+                    className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-[#274b7e] duration-300 px-5 py-3 cursor-pointer"
                   >
                     <h3 className="font-spaceTransit text-6xl tracking-wide">
                       {items.label.toUpperCase()}

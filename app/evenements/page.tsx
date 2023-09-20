@@ -7,7 +7,7 @@ function EvenementsPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="evenements" />
+      <CustomHeroBanner title="evenements" img="/IMG_0227.jpg"/>
       <Footer />
     </>  )
 }

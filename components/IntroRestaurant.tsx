@@ -3,7 +3,7 @@ import React from "react";
 
 function IntroRestaurant() {
   return (
-    <div className="bg-[#F0F5FF] flex justify-center items-center py-32 border-b-2 border-[#002E6D]">
+    <div className="flex justify-center items-center py-24">
       <div className="lg:w-3/5 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-10">
         <div className="lg:w-1/2 w-5/6">
           <img src="/octopus-drawing-blue.png" alt="" className="-scale-x-100"/>

@@ -9,7 +9,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -100, 0, 100],
         }}
         transition={{
@@ -26,7 +26,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -100, 0, 100],
         }}
         transition={{
@@ -44,7 +44,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -150, 0, 50],
         }}
         transition={{
@@ -62,7 +62,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -200, 0, 150],
         }}
         transition={{
@@ -80,7 +80,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -150, 0, 150],
         }}
         transition={{
@@ -98,7 +98,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -150, 0, 250],
         }}
         transition={{
@@ -116,7 +116,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -150, 0, 250],
         }}
         transition={{
@@ -134,7 +134,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -100, 0, 50],
         }}
         transition={{
@@ -152,7 +152,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -300, 0, 100],
         }}
         transition={{
@@ -170,7 +170,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -50, 0, 150],
         }}
         transition={{
@@ -188,7 +188,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -150, 0, 150],
         }}
         transition={{
@@ -206,7 +206,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -100, 0, 100],
         }}
         transition={{
@@ -224,7 +224,7 @@ function Bubble() {
         <motion.div
         animate={{
             scale: [1, 1.5],
-            y: [50, -2000],
+            y: [50, -3500],
             x: [0, -100, 0, 300],
         }}
         transition={{

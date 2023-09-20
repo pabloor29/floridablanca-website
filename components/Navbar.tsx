@@ -7,6 +7,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "./ui/sheet";
+import Link from "next/link";
 
 const links = [
   {
@@ -50,9 +51,12 @@ function Navbar() {
             ))}
           </li>
         </div>
-        <div className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-4xl tracking-wide">
+        <Link
+          href="/reservation"
+          className="px-3 py-1 bg-white/5 hover:bg-white leading-none cursor-pointer duration-200 text-white hover:text-black font-spaceTransit text-4xl tracking-wide"
+        >
           RESERVATION
-        </div>
+        </Link>
       </div>
 
       <div className="lg:hidden fixed left-6 top-6 z-50">
@@ -74,6 +78,14 @@ function Navbar() {
                     </h3>
                   </a>
                 ))}
+                <a
+                  href="/reservation"
+                  className="overflow-hidden h-20 w-4/5 flex items-center text-white hover:bg-[#274b7e] duration-300 px-5 py-3 cursor-pointer"
+                >
+                  <h3 className="font-spaceTransit text-6xl tracking-wide">
+                    RESERVATION
+                  </h3>
+                </a>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

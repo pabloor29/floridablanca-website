@@ -5,9 +5,9 @@ function CustomHeroBanner(props: any) {
     <div className="grid place-items-center h-96">
       <div className="w-full h-1/2 bg-black/50 z-10 absolute"></div>
       <img
-        src="/bar-black.png"
+        src={props.img}
         alt=""
-        className="h-1/2 w-full object-cover absolute z-0"
+        className="h-1/2 w-full object-cover absolute z-0 grayscale"
       />
 
       <div className="relative z-20 h-full flex flex-col items-center justify-center leading-none">

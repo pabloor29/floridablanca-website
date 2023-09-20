@@ -14,7 +14,7 @@ function ContactPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Contact" />
+      <CustomHeroBanner title="Contact" img="/IMG_0234.jpg"/>
       <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-8">
         <div className="lg:w-1/2 py-16 lg:pl-16 space-y-8 flex flex-col items-center justify-center">
           <h3 className="z-10 text-[#002E6D] font-spaceTransit text-8xl tracking-wide">

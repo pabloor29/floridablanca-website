@@ -8,7 +8,7 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Presentation" />
+      <CustomHeroBanner title="Presentation" img="/IMG_0230.jpg"/>
 
       <div className="flex justify-center items-center py-32 z-30">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
@@ -77,8 +77,8 @@ function AboutPage() {
           <h3 className="text-7xl font-spaceTransit w-full text-center">
             Trois salles, trois ambiances...
           </h3>
-          <div className="flex flex-col space-y-44">
-            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+          <div className="flex flex-col space-y-32">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="leaning-none text-5xl font-medium font-spaceTransit">
                   La terrasse
@@ -100,12 +100,12 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+            <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-2/3">
                 <img
-                  src="/moules.png"
+                  src="/IMG_0225.jpg"
                   alt=""
-                  className="-rotate-3 shadow-md hover:scale-105 duration-300"
+                  className="-rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>
               <div className="lg:w-1/3 flex flex-col space-y-8 text-center lg:text-left">
@@ -122,7 +122,7 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   Le patio
@@ -137,9 +137,9 @@ function AboutPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="/moules.png"
+                  src="/IMG_0219.jpg"
                   alt=""
-                  className="rotate-3 shadow-md hover:scale-105 duration-300"
+                  className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>
             </div>

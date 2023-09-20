@@ -8,13 +8,13 @@ function AboutPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Presentation" img="/IMG_0230.jpg"/>
+      <CustomHeroBanner title="Presentation" img="/IMG_0230.webp"/>
 
       <div className="flex justify-center items-center py-32 z-30">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
           <div className="lg:w-1/2 w-5/6 z-30">
             <img
-              src="/worker.png"
+              src="/worker.webp"
               alt=""
               className="shadow-[-25px_25px_0_0_#002E6D] z-30"
             />
@@ -93,7 +93,7 @@ function AboutPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="/moules.png"
+                  src="/moules.webp"
                   alt=""
                   className="rotate-3 shadow-md hover:scale-105 duration-300"
                 />
@@ -103,7 +103,7 @@ function AboutPage() {
             <div className="flex flex-col-reverse lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-2/3">
                 <img
-                  src="/IMG_0225.jpg"
+                  src="/IMG_0225.webp"
                   alt=""
                   className="-rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
@@ -137,7 +137,7 @@ function AboutPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="/IMG_0219.jpg"
+                  src="/IMG_0219.webp"
                   alt=""
                   className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />

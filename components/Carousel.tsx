@@ -36,7 +36,7 @@ const Carousel: React.FC<{ images: string[] }> = ({ images }) => {
 
       <div className="relative w-full h-[620px] z-10">
         <Image
-          src={`/${images[currentIndex]}.jpg`}
+          src={`/${images[currentIndex]}.webp`}
           alt={`Slide ${currentIndex}`}
           fill
           objectFit="cover"

@@ -58,7 +58,7 @@ function SuggestionChef() {
   return (
     <div className="relative w-full flex justify-center items-center pt-24 pb-40">
       <img
-        src="/octopus-drawing-blue.png"
+        src="/octopus-drawing-blue.webp"
         alt=""
         className="absolute opacity-5 z-0 scale-150 overflow-x-hidden"
       />
@@ -103,17 +103,17 @@ function SuggestionChef() {
           className="flex flex-col lg:flex-row justify-center items-center py-8 lg:space-x-10 space-y-20 lg:space-y-0"
         >
           <PlatSuggest
-            src="/casserole-poivron.png"
+            src="/casserole-poivron.webp"
             alt="casserole de poivrons"
             title="CASSEROLLE DE POIVRON"
           />
           <PlatSuggest
-            src="/assiette-poulpe.png"
+            src="/assiette-poulpe.webp"
             alt="assiette de poulpe"
             title="POULPE AU PAPRIKA"
           />
           <PlatSuggest
-            src="/casserole_3fritures.png"
+            src="/casserole_3fritures.webp"
             alt="casserole trois fritures"
             title="CASSEROLLE AUX FRITURES"
           />

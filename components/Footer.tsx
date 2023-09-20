@@ -51,7 +51,7 @@ function Footer() {
         </div>
 
         <div className="w-40 flex items-center justify-center">
-          <img src="/logo.png" alt="logo de floridablanca" />
+          <img src="/logo.webp" alt="logo de floridablanca" />
         </div>
       </div>
       <a

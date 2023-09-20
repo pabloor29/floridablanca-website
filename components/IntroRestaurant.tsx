@@ -55,7 +55,7 @@ function IntroRestaurant() {
           className="lg:w-1/2 w-5/6"
         >
           <img
-            src="/octopus-drawing-blue.png"
+            src="/octopus-drawing-blue.webp"
             alt=""
             className="-scale-x-100"
           />

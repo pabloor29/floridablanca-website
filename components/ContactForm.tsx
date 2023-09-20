@@ -152,14 +152,14 @@ const ReservationForm = () => {
 
           <div className="lg:w-1/3 w-5/6 z-30">
             <img
-              src="/IMG_0219.jpg"
+              src="/IMG_0219.webp"
               alt=""
               className="shadow-[25px_15px_0_0_#002E6D] z-30"
             />
           </div>
 
           <img
-              src="/top-octopus.png"
+              src="/top-octopus.webp"
               alt=""
               className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
             />

@@ -23,7 +23,7 @@ function HeroBanner() {
     <div className="h-screen w-full flex justify-center items-center bg-gradient-to-b from-[#001F50] to-[#002E6D]">
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
       <img
-        src="/bar-black.png"
+        src="/bar-black.webp"
         alt=""
         className="w-full h-screen object-cover absolute z-0"
       />

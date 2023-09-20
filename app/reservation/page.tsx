@@ -8,7 +8,7 @@ function ReservationPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Reservation" img="/IMG_0221.jpg" />
+      <CustomHeroBanner title="Reservation" img="/IMG_0221.webp" />
 
       <ContactForm />
 

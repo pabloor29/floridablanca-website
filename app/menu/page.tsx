@@ -7,7 +7,7 @@ function MenuPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="menu" img="/IMG_0236.jpg"/>
+      <CustomHeroBanner title="menu" img="/IMG_0236.webp"/>
       <Footer />
     </>  )
 }

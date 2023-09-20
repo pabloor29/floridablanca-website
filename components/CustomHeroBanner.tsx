@@ -19,7 +19,7 @@ const textVariants: Variants = {
 
 function CustomHeroBanner(props: any) {
   return (
-    <div className="grid place-items-center h-96">
+    <div className="h-96">
       <div className="w-full h-1/2 bg-black/50 z-10 absolute"></div>
       <img
         src={props.img}

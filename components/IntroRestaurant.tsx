@@ -72,11 +72,9 @@ function IntroRestaurant() {
             Restaurant de Tapas Specialites Espagnoles
           </h3>
           <article className="text-[#274b7e] text-justify lg:text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            culpa enim ab delectus, doloribus repudiandae! Unde atque ipsa
-            repudiandae. Perspiciatis, possimus id ipsa quidem tempore, itaque
-            aspernatur nostrum, et iste deleniti unde accusantium. Eum
-            doloremque minima omnis atque ratione repudiandae?
+            Petit restaurant espagnol au pied de la cité nous proposons une
+            carte variée de tapas et de plats avec une belle sélection de vins
+            locaux.
           </article>
           <Link
             href="/apropos"

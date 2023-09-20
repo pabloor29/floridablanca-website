@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Banknote, CreditCard, Coins } from "lucide-react";
+import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
 import React from "react";
 
 function ContactPage() {
@@ -69,6 +69,19 @@ function ContactPage() {
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>Espèces</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="scale-125">
+                          <Ticket />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Ticket Restaurant</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>

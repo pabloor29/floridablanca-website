@@ -80,7 +80,7 @@ function IntroRestaurant() {
             href="/apropos"
             className="bg-[#002E6D] hover:bg-transparent border hover:border-[#002E6D] text-white font-medium hover:text-[#002E6D] w-fit duration-200 px-4 py-3"
           >
-            Notre histoire
+            À propos du restaurant
           </Link>
         </motion.div>
       </div>

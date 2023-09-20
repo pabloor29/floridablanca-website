@@ -73,16 +73,7 @@ function SuggestionChef() {
         >
           Suggestions du Chef
         </motion.h3>
-        <motion.h4
-          initial="hiddenBottom"
-          whileInView="visibleBottom"
-          viewport={{ once: true, margin: "-20%" }}
-          variants={imagesVariants}
-          className="text-[#002E6D] text-3xl font-spaceTransit leading-none text-center"
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit,
-          ratione?
-        </motion.h4>
+
         <motion.p
           initial="hiddenBottom"
           whileInView="visibleBottom"
@@ -90,9 +81,8 @@ function SuggestionChef() {
           variants={imagesVariants}
           className="text-center text-[#002E6D]"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Necessitatibus sit dolores facilis, recusandae asperiores ipsum
-          tenetur qui incidunt perferendis, ut animi vel quo ipsa rem.
+          Vous avez du mal à choisir ? <br /> Le chef vous propose une selection
+          de trois tapas qui vous ferons découvrir notre univers et nos saveurs.
         </motion.p>
 
         <motion.div
@@ -110,18 +100,18 @@ function SuggestionChef() {
           <PlatSuggest
             src="/assiette-poulpe.webp"
             alt="assiette de poulpe"
-            title="POULPE AU PAPRIKA"
+            title="POULPE - tentacule entier"
           />
           <PlatSuggest
             src="/casserole_3fritures.webp"
             alt="casserole trois fritures"
-            title="CASSEROLLE AUX FRITURES"
+            title="croquetas del rey"
           />
         </motion.div>
 
         <Link
           href="/menu"
-          className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] font-medium hover:text-white lg:w-fit w-full text-center text-xl lg:text-md duration-200 px-4 lg:py-2 py-4"
+          className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] bg-white font-medium hover:text-white lg:w-fit w-full text-center text-xl lg:text-md duration-200 px-4 lg:py-2 py-4"
         >
           Découvrir le menu
         </Link>

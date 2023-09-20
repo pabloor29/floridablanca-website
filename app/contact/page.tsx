@@ -8,6 +8,7 @@ function ContactPage() {
     <>
       <Navbar />
       <CustomHeroBanner title="Contact" />
+      
       <Footer />
     </>
   );

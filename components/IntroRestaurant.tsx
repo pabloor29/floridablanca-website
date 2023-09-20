@@ -2,7 +2,7 @@ import React from "react";
 
 function IntroRestaurant() {
   return (
-    <div className="bg-[#F0F5FF] flex justify-center items-center py-32">
+    <div className="bg-[#F0F5FF] flex justify-center items-center py-32 border-b-2 border-[#002E6D]">
       <div className="w-3/5 flex justify-center items-center space-x-20">
         <div className="w-1/2">
           <img src="/moules.png" alt="" />

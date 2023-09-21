@@ -86,8 +86,9 @@ function Navbar() {
 
       <div className="lg:hidden fixed left-6 top-6 z-50">
         <Sheet key="left">
-          <SheetTrigger className="overflow-hidden">
-            <AlignJustify className="scale-150" />
+          <SheetTrigger className="overflow-hidden w-10 h-10">
+            {/* <AlignJustify className="scale-150 text-white drop-shadow-[0_0_0_1px_rgba(0,0,0)]" /> */}
+            <img src="/hamburger-menu.png" alt="hamburger menu icon" />
           </SheetTrigger>
           <SheetContent className="bg-[#002E6D]">
             <SheetHeader>

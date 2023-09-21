@@ -83,7 +83,7 @@ function AboutPage() {
                 <h3 className="leaning-none text-5xl font-medium font-spaceTransit">
                   La terrasse
                 </h3>
-                <article>
+                <article className="text-justify lg:text-right">
                   Profitez de nos tapas avec une vue sur la majestueuse cité
                   médiévale de Carcassonne. Notre terrasse vous offre
                   l'opportunité de savourer nos délicieuses spécialités
@@ -111,7 +111,7 @@ function AboutPage() {
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   La salle du bar-restaurant
                 </h3>
-                <article>
+                <article className="text-justify lg:text-left">
                   Plongez dans l'ambiance chaleureuse de notre salle principale,
                   où se mêlent l'élégance rustique et le charme espagnol. Les
                   décorations authentiques créent une atmosphère accueillante
@@ -129,7 +129,7 @@ function AboutPage() {
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   Le patio
                 </h3>
-                <article>
+                <article className="text-justify lg:text-right">
                   Notre patio est l'endroit idéal pour organiser des événements
                   spéciaux dans un cadre intime. Entouré de
                   décorations plus originales les unes que les autres, il offre une atmosphère paisible et

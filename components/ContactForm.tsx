@@ -60,6 +60,7 @@ const ReservationForm = () => {
             onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
+            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">Demande de reservation</h3>
             <div>
               <label
                 htmlFor="fullName"
@@ -120,7 +121,7 @@ const ReservationForm = () => {
                   htmlFor="eventDate"
                   className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
-                  Date de l'Evenement
+                  Date
                 </label>
                 <input
                   type="datetime-local"

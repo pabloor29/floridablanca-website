@@ -9,6 +9,7 @@ const ReservationForm = () => {
     numberOfGuests: "",
     eventDate: "",
     specialRequests: "",
+    reservationType: "evenement", // Ajout du champ reservationType
   });
 
   const [succeeded, setSucceeded] = useState(false);
@@ -25,12 +26,18 @@ const ReservationForm = () => {
     e.preventDefault();
 
     // Envoyer les données du formulaire par email
-    const { fullName, email, numberOfGuests, eventDate, specialRequests } =
-      formData;
+    const {
+      fullName,
+      email,
+      numberOfGuests,
+      eventDate,
+      specialRequests,
+      reservationType,
+    } = formData;
 
     const mailTo = "teulet.corentin31660@gmail.com";
     const subject = "Réservation de table pour un évènement";
-    const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate de l'évènement: ${eventDate}\nDemandes spéciales: ${specialRequests}`;
+    const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate de l'évènement: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
       subject
@@ -45,11 +52,14 @@ const ReservationForm = () => {
       {succeeded ? (
         <div className="flex w-full h-96 justify-center items-center space-x-3 text-[#002E6D]">
           <BadgeCheck />
-          <p className="text-xl italic">Votre message a bien été envoyé !</p>
+          <p className="text-xl italic">Votre demande de réservation a bien été envoyé ! <br /> Vous allez recevoir une confirmation d'ici peu 😋</p>
         </div>
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">
-          <form onSubmit={handleSubmit} className="space-y-8 lg:w-1/3 w-5/6 z-20">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-8 lg:w-1/3 w-5/6 z-20"
+          >
             <div>
               <label
                 htmlFor="fullName"
@@ -113,7 +123,7 @@ const ReservationForm = () => {
                   Date de l'Evenement
                 </label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   id="eventDate"
                   name="eventDate"
                   value={formData.eventDate}
@@ -122,6 +132,26 @@ const ReservationForm = () => {
                   required
                 />
               </div>
+            </div>
+
+            <div className="lg:w-1/2 w-full">
+              <label
+                htmlFor="reservationType"
+                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+              >
+                Type de Reservation
+              </label>
+              <select
+                id="reservationType"
+                name="reservationType"
+                value={formData.reservationType}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                required
+              >
+                <option value="evenement">Événement</option>
+                <option value="repas">Repas</option>
+              </select>
             </div>
 
             <div>
@@ -147,7 +177,6 @@ const ReservationForm = () => {
             >
               RÉSERVER UNE TABLE
             </button>
-
           </form>
 
           <div className="lg:w-1/3 w-5/6 z-30">
@@ -159,10 +188,10 @@ const ReservationForm = () => {
           </div>
 
           <img
-              src="/top-octopus.webp"
-              alt=""
-              className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
-            />
+            src="/top-octopus.webp"
+            alt=""
+            className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
+          />
         </div>
       )}
     </>

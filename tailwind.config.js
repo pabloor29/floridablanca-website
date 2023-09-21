@@ -2,30 +2,30 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     fontSize: {
-      bigLG: '15vw',
-      bigSM: '32vw',
-      
-      sm: '0.8rem',
-      base: '1rem',
-      xl: '1.25rem',
-      '2xl': '1.563rem',
-      '3xl': '1.953rem',
-      '4xl': '2.441rem',
-      '5xl': '3.00rem',
-      '6xl': '3.75rem',
-      '7xl': '4.5rem',
-      '8xl': '6rem',
-      '9xl': '8rem',
+      bigLG: "15vw",
+      bigSM: "32vw",
+
+      sm: "0.8rem",
+      base: "1rem",
+      xl: "1.25rem",
+      "2xl": "1.563rem",
+      "3xl": "1.953rem",
+      "4xl": "2.441rem",
+      "5xl": "3.00rem",
+      "6xl": "3.75rem",
+      "7xl": "4.5rem",
+      "8xl": "6rem",
+      "9xl": "8rem",
     },
     fontFamily: {
-      'spaceTransit': ['SpaceTransit', 'ui-serif'],
+      spaceTransit: ["SpaceTransit", "ui-serif"],
     },
     container: {
       center: true,
@@ -36,9 +36,9 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -97,4 +97,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

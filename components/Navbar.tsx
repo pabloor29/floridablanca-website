@@ -44,8 +44,8 @@ const Variants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: "spring",
-      duration: 3,
+      type: "linear",
+      duration: 2,
       delay: 0.5,
     },
   },

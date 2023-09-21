@@ -39,12 +39,12 @@ const imagesVariants: Variants = {
     },
   },
   hiddenRight: {
-    x: -200,
     opacity: 0,
+    x: -200,
   },
   visibleRight: {
-    x: 0,
     opacity: 1,
+    x: 0,
     transition: {
       type: "spring",
       duration: 1.5,

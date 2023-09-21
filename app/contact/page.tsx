@@ -14,10 +14,11 @@ function ContactPage() {
   return (
     <>
       <Navbar />
-      <CustomHeroBanner title="Contact" img="/IMG_0234.webp"/>
-      <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-8 space-y-8">
-        <div className="lg:w-1/2 py-16 lg:pl-16 space-y-8 flex flex-col items-center justify-center">
-          <h3 className="z-10 text-[#002E6D] font-spaceTransit text-8xl tracking-wide">
+      <CustomHeroBanner title="Contact" img="/IMG_0234.webp" />
+
+      <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0">
+        <div className="lg:h-[700px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
+          <h3 className="z-10 leading-none text-[#002E6D] font-spaceTransit text-8xl tracking-wide">
             Floridablanca
           </h3>
 
@@ -122,11 +123,8 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="lg:w-1/2">
-          <img
-            src="/floridablanca-map.webp"
-            alt="carte google map Floridablanca à Carcassonne"
-          />
+        <div className="lg:w-1/2 h-96 flex items-center justify-center lg:h-[700px] overflow-hidden">
+          <img src="/florida-map-3.png" alt="" />
         </div>
       </div>
 

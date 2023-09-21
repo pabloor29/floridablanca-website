@@ -176,7 +176,7 @@ const ReservationForm = () => {
               type="submit"
               className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer"
             >
-              RÉSERVER UNE TABLE
+              ENVOYER LA DEMANDE
             </button>
           </form>
 

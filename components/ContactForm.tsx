@@ -9,7 +9,7 @@ const ReservationForm = () => {
     numberOfGuests: "",
     eventDate: "",
     specialRequests: "",
-    reservationType: "evenement", // Ajout du champ reservationType
+    reservationType: "repas", // Ajout du champ reservationType
   });
 
   const [succeeded, setSucceeded] = useState(false);
@@ -37,7 +37,7 @@ const ReservationForm = () => {
 
     const mailTo = "teulet.corentin31660@gmail.com";
     const subject = `Réservation de table - ${eventDate}`;
-    const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate de l'évènement: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
+    const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate et heure: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
       subject

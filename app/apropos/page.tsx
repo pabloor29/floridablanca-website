@@ -10,20 +10,18 @@ function AboutPage() {
       <Navbar />
       <CustomHeroBanner title="Presentation" img="/IMG_0230.webp" />
 
-      <div className="flex justify-center items-center py-32 z-30">
+      <div className="flex justify-center items-center py-32 z-40">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
-          <div className="lg:w-1/2 w-5/6">
-            <img
-              src="/worker.webp"
-              alt=""
-              className="shadow-[-25px_25px_0_0_#002E6D] z-20"
-            />
-          </div>
+          <img
+            src="/worker.webp"
+            alt=""
+            className="shadow-[-25px_25px_0_0_#002E6D] lg:w-1/2 w-5/6 z-40"
+          />
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">
-            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit z-20">
+            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
               le chef JEAN-LOUP
             </h3>
-            <article className="text-[#274b7e] text-justify lg:text-left z-20">
+            <article className="text-[#274b7e] text-justify lg:text-left">
               Le Floridablanca a ouvert ses portes en 2017, rue trivalle, à
               mi-chemin entre la Bastide et la Cité Médiévale. Jean-Loup,
               affable, régale sa clientèle, qui mêle tout autant de touristes
@@ -131,12 +129,14 @@ function AboutPage() {
                 </h3>
                 <article className="text-justify lg:text-right">
                   Notre patio est l'endroit idéal pour organiser des événements
-                  spéciaux dans un cadre intime. Entouré de
-                  décorations plus originales les unes que les autres, il offre une atmosphère paisible et
-                  relaxante, parfaitement adaptée à des occasions mémorables. De
-                  plus, l'ambiance conviviale de soirées d'été ou
-                  de tout type ajoute une touche festive à cet espace à l'air libre ou couvert. Réservez le patio pour célébrer vos moments
-                  précieux avec style, authenticité et une petite touche espagnole.
+                  spéciaux dans un cadre intime. Entouré de décorations plus
+                  originales les unes que les autres, il offre une atmosphère
+                  paisible et relaxante, parfaitement adaptée à des occasions
+                  mémorables. De plus, l'ambiance conviviale de soirées d'été ou
+                  de tout type ajoute une touche festive à cet espace à l'air
+                  libre ou couvert. Réservez le patio pour célébrer vos moments
+                  précieux avec style, authenticité et une petite touche
+                  espagnole.
                 </article>
               </div>
               <div className="lg:w-2/3">

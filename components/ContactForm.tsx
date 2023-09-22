@@ -50,9 +50,9 @@ const ReservationForm = () => {
   return (
     <>
       {succeeded ? (
-        <div className="flex w-full h-96 justify-center items-center space-x-3 text-[#002E6D]">
+        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center space-x-3 text-[#002E6D]">
           <BadgeCheck />
-          <p className="text-xl italic">Votre demande de réservation a bien été envoyé ! <br /> Vous allez recevoir une confirmation d'ici peu 😋</p>
+          <p className="text-xl italic text-center">Votre demande de réservation a bien été envoyé ! <br /> Vous allez recevoir une confirmation d'ici peu 😋</p>
         </div>
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">

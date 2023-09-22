@@ -107,7 +107,7 @@ function ContactPage() {
                 <p>Lundi - Samedi </p>
                 <p className="font-spaceTransit text-5xl">
                   {" "}
-                  12:00 - 14:00 & 18:30 - 22:00
+                  12:00 - 14:00 & 18:00 - 22:00
                 </p>
               </div>
 
@@ -116,7 +116,7 @@ function ContactPage() {
                 <p>Mardi - Samedi </p>
                 <p className="font-spaceTransit text-5xl">
                   {" "}
-                  12:00 - 14:00 & 18:30 - 22:00
+                  12:00 - 14:00 & 18:00 - 22:00
                 </p>
               </div>
             </div>

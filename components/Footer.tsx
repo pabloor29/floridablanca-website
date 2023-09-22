@@ -12,14 +12,14 @@ function Footer() {
               <li className="font-bold text-lg">Juillet - Août</li>
               <p>Lundi - Samedi</p>
               <p>
-                12:00 - 14:00 <br /> 18:30 - 22:00
+                12:00 - 14:00 <br /> 18:00 - 22:00
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Septembre - Juin</li>
               <p>Mardi - Samedi</p>
               <p>
-                12:00 - 14:00 <br /> 18:30 - 22:00
+                12:00 - 14:00 <br /> 18:00 - 22:00
               </p>
             </div>
           </ul>

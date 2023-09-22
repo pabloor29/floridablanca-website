@@ -37,7 +37,7 @@ function PlatCursorEffect() {
           <div className="w-full grid place-items-center">
             <a
               href="/reservation"
-              className="bg-white hover:bg-[#002E6D] border hover:border-white text-[#002E6D] hover:text-white lg:w-fit w-full text-center text-xl lg:text-base duration-200 font-medium px-5 lg:py-3 py-4"
+              className="bg-white z-30 hover:bg-[#002E6D] border hover:border-white text-[#002E6D] hover:text-white lg:w-fit w-full text-center text-xl lg:text-base duration-200 font-medium px-5 lg:py-3 py-4"
             >
               Contactez-nous
             </a>

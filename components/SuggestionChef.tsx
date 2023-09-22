@@ -111,7 +111,7 @@ function SuggestionChef() {
 
         <Link
           href="/menu"
-          className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] bg-white font-medium hover:text-white lg:w-fit w-full text-center text-xl lg:text-md duration-200 px-4 lg:py-2 py-4"
+          className="hover:bg-[#002E6D] border border-[#002E6D] text-[#002E6D] bg-white font-medium hover:text-white lg:w-fit w-full text-center text-xl lg:text-base duration-200 px-5 lg:py-3 py-4"
         >
           Découvrir le menu
         </Link>

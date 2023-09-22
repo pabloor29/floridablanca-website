@@ -80,12 +80,19 @@ function IntroVins() {
           Notre selection de vins
         </h3>
         <article className="lg:w-4/5 text-white text-justify lg:text-left">
-        Plongez dans l'essence même de notre terroir avec "L'Encre du Poulpe", un vin rouge produit par un vigneron local, cher ami de notre chef. Ce dernier représente l'authenticité et la passion du savoir-faire régional. Arborant une étiquette unique, créée spécialement pour le restaurant du Floridablanca par un ami cher au chef, ce vin incarne parfaitement l'âme et l'identité de notre établissement. Découvrez une expérience gustative qui célèbre l'amitié, la tradition et l'amour du vin.
+          Plongez dans l'essence même de notre terroir avec "L'Encre du Poulpe",
+          un vin rouge produit par un vigneron local, cher ami de notre chef. Ce
+          dernier représente l'authenticité et la passion du savoir-faire
+          régional. Arborant une étiquette unique, créée spécialement pour le
+          restaurant du Floridablanca par un ami cher au chef, ce vin incarne
+          parfaitement l'âme et l'identité de notre établissement. Découvrez une
+          expérience gustative qui célèbre l'amitié, la tradition et l'amour du
+          vin.
         </article>
 
         <Link
           href="/menu"
-          className="bg-white hover:bg-[#002E6D] border hover:border-white text-[#002E6D] hover:text-white lg:w-fit w-full text-center text-xl lg:text-md duration-200 px-4 lg:py-2 py-4"
+          className="bg-white hover:bg-[#002E6D] border hover:border-white text-[#002E6D] hover:text-white lg:w-fit w-full text-center text-xl lg:text-base duration-200 px-5 lg:py-2 py-4 font-medium"
         >
           Nos Vins
         </Link>

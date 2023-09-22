@@ -65,7 +65,7 @@ function Footer() {
 
       <a
         href="https://www.cntl.digital/"
-        className="text-[#0A3C74] hover:underline pt-6 pb-6 text-xs w-full bg-white flex justify-center items-center"
+        className="text-[#0A3C74] hover:underline py-2 text-xs w-full bg-[#e0ebff] flex justify-center items-center"
       >
         © This is a CNTL Digital creation - 2023
       </a>

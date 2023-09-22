@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import React from "react";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, Utensils } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -25,10 +25,6 @@ const links = [
     label: "menu",
     href: "/menu",
   },
-  // {
-  //   label: "evenements",
-  //   href: "/evenements",
-  // },
   {
     label: "contact",
     href: "/contact",
@@ -64,7 +60,7 @@ function Navbar() {
         <a href="/" className="h-14 w-14">
           <img src="/logo-white.webp" alt="logo de floridablanca" />
         </a>
-        <div className="">
+        <div>
           <li className="flex justify-center space-x-12">
             {links.map((link) => (
               <a
@@ -84,9 +80,9 @@ function Navbar() {
         </Link>
       </motion.div>
 
-      <div className="lg:hidden fixed left-6 top-6 z-50">
+      <div className="lg:hidden fixed top-6 z-50 flex justify-between w-full px-6">
         <Sheet key="left">
-          <SheetTrigger className="overflow-hidden w-10 h-10">
+          <SheetTrigger className="overflow-hidden w-10 h-10 rounded-full shadow">
             <img src="/hamburger-menu.png" alt="hamburger menu icon" />
           </SheetTrigger>
           <SheetContent className="bg-[#002E6D]">
@@ -115,6 +111,9 @@ function Navbar() {
             </SheetHeader>
           </SheetContent>
         </Sheet>
+        <a href="/reservation" className="shadow cursor-pointer overflow-hidden w-10 h-10 rounded-full bg-white flex items-center justify-center">
+          <Utensils />
+        </a>
       </div>
     </nav>
   );

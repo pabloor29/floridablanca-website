@@ -17,7 +17,7 @@ function ContactPage() {
       <CustomHeroBanner title="Contact" img="/IMG_0234.webp" />
 
       <div className="w-full flex flex-col lg:flex-row justify-between lg:space-x-8 space-y-8 lg:space-y-0">
-        <div className="lg:h-[700px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
+        <div className="lg:h-[750px] h-[1100px] lg:w-1/2 lg:pl-16 space-y-8 flex flex-col items-center justify-center lg:py-12">
           <h3 className="z-10 leading-none text-[#002E6D] font-spaceTransit text-8xl tracking-wide">
             Floridablanca
           </h3>
@@ -97,7 +97,7 @@ function ContactPage() {
               </div>
             </div>
 
-            <div className="text-[#002E6D] border-4 w-fit px-8 py-4 border-[#002E6D] flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#002E6D]">
+            <div className="text-[#002E6D] border-4 w-fit mt-12 lg:mt-0 px-8 py-4 border-[#002E6D] flex flex-col items-center justify-center space-y-6 shadow-[-15px_15px_0_0_#002E6D]">
               <h3 className="w-full text-center z-10 text-[#002E6D] border-b-4 border-[#002E6D] font-spaceTransit text-7xl tracking-wide">
                 horaires
               </h3>
@@ -123,7 +123,7 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="lg:w-1/2 h-96 flex items-center justify-center lg:h-[700px] overflow-hidden">
+        <div className="lg:w-1/2 flex items-center justify-center lg:h-[750px] overflow-hidden">
           <img src="/florida-map-3.png" alt="" />
         </div>
       </div>

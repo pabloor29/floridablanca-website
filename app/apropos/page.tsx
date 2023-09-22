@@ -12,11 +12,11 @@ function AboutPage() {
 
       <div className="flex justify-center items-center py-32 z-30">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
-          <div className="lg:w-1/2 w-5/6 z-40">
+          <div className="lg:w-1/2 w-5/6">
             <img
               src="/worker.webp"
               alt=""
-              className="shadow-[-25px_25px_0_0_#002E6D] z-40"
+              className="shadow-[-25px_25px_0_0_#002E6D] z-20"
             />
           </div>
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">

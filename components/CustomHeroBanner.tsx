@@ -19,12 +19,12 @@ const textVariants: Variants = {
 
 function CustomHeroBanner(props: any) {
   return (
-    <div className="h-96 z-40">
-      <div className="w-full h-1/2 bg-black/50 z-40 absolute"></div>
+    <div className="h-96 relative">
+      <div className="w-full h-full bg-black/50 z-40 absolute"></div>
       <img
         src={props.img}
         alt=""
-        className="h-1/2 w-full object-cover absolute z-30 grayscale"
+        className="h-full w-full object-cover absolute z-30 grayscale"
       />
 
       <div className="relative z-40 h-full flex flex-col items-center justify-center leading-none">

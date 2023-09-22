@@ -36,7 +36,7 @@ const ReservationForm = () => {
     } = formData;
 
     const mailTo = "teulet.corentin31660@gmail.com";
-    const subject = "Réservation de table pour un évènement";
+    const subject = `Réservation de table - ${eventDate}`;
     const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate de l'évènement: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
@@ -50,7 +50,7 @@ const ReservationForm = () => {
   return (
     <>
       {succeeded ? (
-        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center space-x-3 text-[#002E6D]">
+        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#002E6D]">
           <BadgeCheck />
           <p className="text-xl italic text-center">Votre demande de réservation a bien été envoyé ! <br /> Vous allez recevoir une confirmation d'ici peu 😋</p>
         </div>
@@ -111,6 +111,7 @@ const ReservationForm = () => {
                   name="numberOfGuests"
                   value={formData.numberOfGuests}
                   onChange={handleChange}
+                  min={1}
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
@@ -150,8 +151,8 @@ const ReservationForm = () => {
                 className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               >
-                <option value="evenement">Événement</option>
                 <option value="repas">Repas</option>
+                <option value="evenement">Événement</option>
               </select>
             </div>
 

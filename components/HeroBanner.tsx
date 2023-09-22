@@ -45,7 +45,7 @@ function HeroBanner() {
           variants={textVariants}
           className="z-10 text-white/90 font-spaceTransit lg:text-5xl text-2xl"
         >
-          Bar a poulpe. Tapas maison avec vins Espagnols et regionaux.
+          Bar a poulpe. Tapas espagnols maison avec vins regionaux.
         </motion.h3>
       </div>
     </div>

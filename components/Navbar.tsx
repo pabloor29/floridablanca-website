@@ -25,10 +25,10 @@ const links = [
     label: "menu",
     href: "/menu",
   },
-  {
-    label: "evenements",
-    href: "/evenements",
-  },
+  // {
+  //   label: "evenements",
+  //   href: "/evenements",
+  // },
   {
     label: "contact",
     href: "/contact",

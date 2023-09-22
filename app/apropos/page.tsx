@@ -10,12 +10,12 @@ function AboutPage() {
       <Navbar />
       <CustomHeroBanner title="Presentation" img="/IMG_0230.webp" />
 
-      <div className="flex justify-center items-center py-32 z-40">
+      <div className="z-40 flex justify-center items-center py-32 bg-white relative">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
           <img
             src="/worker.webp"
             alt=""
-            className="shadow-[-25px_25px_0_0_#002E6D] lg:w-1/2 w-5/6 z-40"
+            className="shadow-[-25px_25px_0_0_#002E6D] lg:w-1/2 w-5/6"
           />
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">
             <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
@@ -38,39 +38,37 @@ function AboutPage() {
 
       <div className="relative bg-gradient-to-t from-[#000e21] to-[#295DA6] flex justify-center items-center py-20 text-white">
         <div
+        className="
+    absolute
+    top-0
+    left-0
+    w-full
+    overflow-hidden
+    leading-none
+    rotate-180
+    bg-white
+    "
+      >
+        <svg
           className="
-      absolute
-      top-0
-      left-0
-      w-full
-      overflow-hidden
-      leading-none
-      rotate-180
-      bg-white
-      "
+          relative
+          block
+          h-14
+          rotate-180
+          w-full
+          "
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
         >
-          <svg
-            className="
-            relative
-            block
-            h-14
-            rotate-180
-            w-full
-            "
-            data-name="Layer 1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-              className="fill-[#285AA2]"
-            ></path>
-          </svg>
-        </div>
-
+          <path
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+            className="fill-[#285AA2]"
+          ></path>
+        </svg>
+      </div>
         <Bubble />
-
         <div className="lg:w-3/5 w-5/6 flex flex-col justify-center items-center space-y-20">
           <h3 className="text-7xl font-spaceTransit w-full text-center">
             Trois salles, trois ambiances...

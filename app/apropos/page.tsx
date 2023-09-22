@@ -12,7 +12,7 @@ function AboutPage() {
 
       <div className="flex justify-center items-center py-32 z-30">
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
-          <div className="lg:w-1/2 w-5/6">
+          <div className="lg:w-1/2 w-5/6 z-40">
             <img
               src="/worker.webp"
               alt=""
@@ -20,10 +20,10 @@ function AboutPage() {
             />
           </div>
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">
-            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
+            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit z-20">
               le chef JEAN-LOUP
             </h3>
-            <article className="text-[#274b7e] text-justify lg:text-left">
+            <article className="text-[#274b7e] text-justify lg:text-left z-20">
               Le Floridablanca a ouvert ses portes en 2017, rue trivalle, à
               mi-chemin entre la Bastide et la Cité Médiévale. Jean-Loup,
               affable, régale sa clientèle, qui mêle tout autant de touristes

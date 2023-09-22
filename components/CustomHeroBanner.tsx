@@ -34,7 +34,7 @@ function CustomHeroBanner(props: any) {
           viewport={{ once: true }}
           variants={textVariants}
           className="text-bigSM lg:text-bigLG text-white font-spaceTransit
-            tracking-wide z-30 drop-shadow-[5px_5px_0_#00A6E6]"
+            tracking-wide z-40 drop-shadow-[5px_5px_0_#00A6E6]"
         >
           {props.title}
         </motion.h1>

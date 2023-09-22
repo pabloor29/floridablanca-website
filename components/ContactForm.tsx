@@ -35,8 +35,8 @@ const ReservationForm = () => {
       reservationType,
     } = formData;
 
-    const mailTo = "teulet.corentin31660@gmail.com";
-    const subject = `Réservation de table - ${eventDate}`;
+    const mailTo = "floridablanca22@gmail.com";
+    const subject = `Réservation de table - Pour le ${eventDate}`;
     const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate et heure: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(

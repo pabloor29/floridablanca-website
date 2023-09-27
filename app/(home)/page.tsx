@@ -2,6 +2,7 @@ import Footer from "../../components/Footer";
 import HeroBanner from "../../components/HeroBanner";
 import MainPage from "../../components/MainPage";
 import Navbar from "../../components/Navbar";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroBanner />
       <MainPage />
       <Footer />
+      <Analytics />
     </main>
   );
 }

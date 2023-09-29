@@ -14,7 +14,7 @@ import { Variants, motion } from "framer-motion";
 
 const links = [
   {
-    label: "acceuil",
+    label: "accueil",
     href: "/",
   },
   {

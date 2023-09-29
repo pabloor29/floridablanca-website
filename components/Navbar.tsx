@@ -22,7 +22,6 @@ const links = [
     href: "/apropos",
   },
   {
-    
     label: "menu",
     href: "/menu",
   },
@@ -112,9 +111,15 @@ function Navbar() {
             </SheetHeader>
           </SheetContent>
         </Sheet>
-        <a href="/reservation" className="shadow cursor-pointer overflow-hidden w-10 h-10 rounded-full bg-white flex items-center justify-center">
-          <Utensils />
+        <a
+          href="/reservation"
+          className="shadow cursor-pointer overflow-hidden h-10 px-3 rounded-full bg-white flex items-center justify-center"
+        >
+          <h3 className="font-spaceTransit text-3xl tracking-wide text-[#002E6D]">reserver</h3>
         </a>
+        {/* <a href="/reservation" className="shadow cursor-pointer overflow-hidden w-10 h-10 rounded-full bg-white flex items-center justify-center">
+          <Utensils />
+        </a> */}
       </div>
     </nav>
   );

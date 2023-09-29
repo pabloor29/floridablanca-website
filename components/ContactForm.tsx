@@ -3,16 +3,50 @@ import { BadgeCheck } from "lucide-react";
 import React, { useState } from "react";
 
 const ReservationForm = () => {
+  const translations = {
+    fr: {
+      title: "demande de reservation",
+      fullNameLabel: "Nom Complet",
+      emailLabel: "Email",
+      numberOfGuestsLabel: "Nombre de Convives",
+      eventDateLabel: "Date et Heure",
+      reservationTypeLabel: "Type de Reservation",
+      specialRequestsLabel: "Demandes Speciales",
+      submitButton: "ENVOYER LA DEMANDE",
+    },
+    en: {
+      title: "reservation request",
+      fullNameLabel: "Full Name",
+      emailLabel: "Email",
+      numberOfGuestsLabel: "Number of Guests",
+      eventDateLabel: "Date and Time",
+      reservationTypeLabel: "Reservation Type",
+      specialRequestsLabel: "Special Requests",
+      submitButton: "SEND REQUEST",
+    },
+    es: {
+      title: "solicitud de reserva",
+      fullNameLabel: "Nombre Completo",
+      emailLabel: "Correo Electrónico",
+      numberOfGuestsLabel: "Numero de Invitados",
+      eventDateLabel: "Fecha y Hora",
+      reservationTypeLabel: "Tipo de Reserva",
+      specialRequestsLabel: "Solicitudes Especiales",
+      submitButton: "ENVIAR SOLICITUD",
+    },
+  };
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     numberOfGuests: "",
     eventDate: "",
     specialRequests: "",
-    reservationType: "repas", // Ajout du champ reservationType
+    reservationType: "repas",
   });
 
   const [succeeded, setSucceeded] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("fr");
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -25,7 +59,6 @@ const ReservationForm = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    // Envoyer les données du formulaire par email
     const {
       fullName,
       email,
@@ -36,23 +69,27 @@ const ReservationForm = () => {
     } = formData;
 
     const mailTo = "floridablanca22@gmail.com";
-    const subject = `Réservation de table - Pour le ${eventDate}`;
-    const body = `Nom complet: ${fullName}\nEmail: ${email}\nNombre de convives: ${numberOfGuests}\nDate et heure: ${eventDate}\nDemandes spéciales: ${specialRequests}\nType de réservation: ${reservationType}`;
+    const subject = `Table Reservation - For ${eventDate}`;
+    const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
 
     window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 
-    // Mettre à jour l'état succeeded après la soumission réussie
     setSucceeded(true);
   };
+
+  const translation = translations[selectedLanguage];
 
   return (
     <>
       {succeeded ? (
         <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#002E6D]">
           <BadgeCheck />
-          <p className="text-xl italic text-center">Votre demande de réservation a bien été envoyé ! <br /> Vous allez recevoir une confirmation d'ici peu 😋</p>
+          <p className="text-xl italic text-center">
+            Votre demande de réservation a bien été envoyé ! <br /> Vous allez
+            recevoir une confirmation d'ici peu 😋
+          </p>
         </div>
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">
@@ -60,13 +97,26 @@ const ReservationForm = () => {
             onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
-            <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">Demande de reservation</h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit">
+                {translation.title}
+              </h3>
+              <select
+                value={selectedLanguage}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
+                className="rounded-md border border-[#597ba8] text-xl px-2 py-1 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="fr">🇫🇷</option>
+                <option value="en">🇬🇧</option>
+                <option value="es">🇪🇸</option>
+              </select>
+            </div>
             <div>
               <label
                 htmlFor="fullName"
                 className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
               >
-                Nom Complet
+                {translation.fullNameLabel}
               </label>
               <input
                 type="text"
@@ -103,7 +153,7 @@ const ReservationForm = () => {
                   htmlFor="numberOfGuests"
                   className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
-                  Nombre de Convives
+                  {translation.numberOfGuestsLabel}
                 </label>
                 <input
                   type="number"
@@ -122,7 +172,7 @@ const ReservationForm = () => {
                   htmlFor="eventDate"
                   className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
-                  Date
+                  {translation.eventDateLabel}
                 </label>
                 <input
                   type="datetime-local"
@@ -141,7 +191,7 @@ const ReservationForm = () => {
                 htmlFor="reservationType"
                 className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
               >
-                Type de Reservation
+                {translation.reservationTypeLabel}
               </label>
               <select
                 id="reservationType"
@@ -161,7 +211,7 @@ const ReservationForm = () => {
                 htmlFor="specialRequests"
                 className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
               >
-                Demandes Speciales
+                {translation.specialRequestsLabel}
               </label>
               <textarea
                 id="specialRequests"
@@ -177,7 +227,7 @@ const ReservationForm = () => {
               type="submit"
               className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer"
             >
-              ENVOYER LA DEMANDE
+              {translation.submitButton}
             </button>
           </form>
 

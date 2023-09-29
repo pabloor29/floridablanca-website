@@ -10,9 +10,16 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Nombre de Convives",
       eventDateLabel: "Date et Heure",
+
       reservationTypeLabel: "Type de Reservation",
+      repas: "Repas",
+      evenement: "Evenement",
+
       specialRequestsLabel: "Demandes Speciales",
       submitButton: "ENVOYER LA DEMANDE",
+
+      afterSentMessage: `Votre demande de réservation a bien été envoyé ! ${<br />} Vous allez
+      recevoir une confirmation d'ici peu 😋`,
     },
     en: {
       title: "reservation request",
@@ -20,9 +27,17 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Number of Guests",
       eventDateLabel: "Date and Time",
+
       reservationTypeLabel: "Reservation Type",
+      repas: "Meal",
+      evenement: "Event",
+
       specialRequestsLabel: "Special Requests",
       submitButton: "SEND REQUEST",
+
+      afterSentMessage: `Your reservation request has been sent! ${<br />} You will
+      receive confirmation shortly 😋`,
+
     },
     es: {
       title: "solicitud de reserva",
@@ -30,9 +45,16 @@ const ReservationForm = () => {
       emailLabel: "Correo Electrónico",
       numberOfGuestsLabel: "Numero de Invitados",
       eventDateLabel: "Fecha y Hora",
+
       reservationTypeLabel: "Tipo de Reserva",
+      repas: "Comida",
+      evenement: "Evento",
+
       specialRequestsLabel: "Solicitudes Especiales",
       submitButton: "ENVIAR SOLICITUD",
+
+      afterSentMessage: `¡Su solicitud de reserva ha sido enviada! ${<br />} Lo harás
+      recibir confirmación en breve 😋`,
     },
   };
 
@@ -80,15 +102,14 @@ const ReservationForm = () => {
   };
 
   const translation = translations[selectedLanguage as keyof typeof translations];
-  
+
   return (
     <>
       {succeeded ? (
         <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#002E6D]">
           <BadgeCheck />
           <p className="text-xl italic text-center">
-            Votre demande de réservation a bien été envoyé ! <br /> Vous allez
-            recevoir une confirmation d'ici peu 😋
+            {translation.afterSentMessage}
           </p>
         </div>
       ) : (
@@ -201,8 +222,8 @@ const ReservationForm = () => {
                 className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 required
               >
-                <option value="repas">Repas</option>
-                <option value="evenement">Événement</option>
+                <option value="repas">{translation.repas}</option>
+                <option value="evenement">{translation.evenement}</option> 
               </select>
             </div>
 

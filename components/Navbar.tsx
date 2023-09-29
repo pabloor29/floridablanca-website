@@ -41,7 +41,7 @@ const Variants: Variants = {
     opacity: 1,
     transition: {
       type: "linear",
-      duration: 2,
+      duration: 1,
       delay: 0.5,
     },
   },

@@ -79,8 +79,8 @@ const ReservationForm = () => {
     setSucceeded(true);
   };
 
-  const translation = translations[selectedLanguage];
-
+  const translation = translations[selectedLanguage as keyof typeof translations];
+  
   return (
     <>
       {succeeded ? (

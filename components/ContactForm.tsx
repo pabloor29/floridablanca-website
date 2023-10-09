@@ -118,7 +118,7 @@ const ReservationForm = () => {
             onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
-            <div className="flex items-center justify-between flex-col-reverse">
+            <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit leading-none">
                 {translation.title}
               </h3>

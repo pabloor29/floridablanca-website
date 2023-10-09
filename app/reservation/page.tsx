@@ -9,9 +9,7 @@ function ReservationPage() {
     <>
       <Navbar />
       <CustomHeroBanner title="Reservation" img="/IMG_0221.webp" />
-
       <ContactForm />
-
       <Footer />
     </>
   );

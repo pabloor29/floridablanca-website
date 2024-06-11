@@ -26,9 +26,7 @@ function AboutPage() {
               mi-chemin entre la Bastide et la Cité Médiévale. Jean-Loup,
               affable, régale sa clientèle, qui mêle tout autant de touristes
               que de "figures" carcassonnaises, de préparations culinaires
-              largement inspirées de sa culture méditerranéenne. Son acolyte
-              Quentin, au service, s'occupe de tou·te·s avec beaucoup
-              d'attention. À la carte, on retrouve plats et tapas : de
+              largement inspirées de sa culture méditerranéenne. À la carte, on retrouve plats et tapas : de
               l'encornet et aïoli maison aux padrons en passant par une
               pika-pika de boeuf ou quelques calçots...
             </article>
@@ -120,7 +118,7 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
+            {/* <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   Le patio
@@ -144,7 +142,7 @@ function AboutPage() {
                   className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -100,8 +100,9 @@ const ReservationForm = () => {
       ((month === 10 && dayOfMonth >= 16) ||
         month === 11 ||
         (month === 11 && dayOfMonth <= 2));
+    const isSeptToJuneMonday = day === 1 && (month >= 8 || month <= 5);
 
-    return day !== 0 && !isAug31 && !isNov16ToDec2;
+    return day !== 0 && !isAug31 && !isNov16ToDec2 && !isSeptToJuneMonday;
   };
 
   const isRestaurantOpen = (time: any) => {

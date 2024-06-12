@@ -136,11 +136,9 @@ const ReservationForm = () => {
     const subject = `Table Reservation - Le ${eventDate} à ${eventTime}`;
     const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}, ${eventTime}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
 
-    // window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
-    //   subject
-    // )}&body=${encodeURIComponent(body)}`;
-
-    console.log(subject, body);
+    window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
 
     setSucceeded(true);
   };

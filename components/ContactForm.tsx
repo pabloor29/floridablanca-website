@@ -1,6 +1,14 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
 import React, { useState } from "react";
+import CustomTimePicker from "./CustomTimePicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { fr } from "date-fns/locale";
+
+registerLocale("fr", fr);
+setDefaultLocale("fr");
 
 const ReservationForm = () => {
   const translations = {
@@ -18,7 +26,7 @@ const ReservationForm = () => {
       specialRequestsLabel: "Demandes Speciales",
       submitButton: "ENVOYER LA DEMANDE",
 
-      afterSentMessage: `Votre demande de réservation a bien été envoyé ! ${<br />} Vous allez
+      afterSentMessage: `Votre demande de réservation a bien été envoyé ! Vous allez
       recevoir une confirmation d'ici peu 😋`,
     },
     en: {
@@ -35,9 +43,8 @@ const ReservationForm = () => {
       specialRequestsLabel: "Special Requests",
       submitButton: "SEND REQUEST",
 
-      afterSentMessage: `Your reservation request has been sent! ${<br />} You will
+      afterSentMessage: `Your reservation request has been sent! You will
       receive confirmation shortly 😋`,
-
     },
     es: {
       title: "solicitud de reserva",
@@ -53,7 +60,7 @@ const ReservationForm = () => {
       specialRequestsLabel: "Solicitudes Especiales",
       submitButton: "ENVIAR SOLICITUD",
 
-      afterSentMessage: `¡Su solicitud de reserva ha sido enviada! ${<br />} Lo harás
+      afterSentMessage: `¡Su solicitud de reserva ha sido enviada! Lo harás
       recibir confirmación en breve 😋`,
     },
   };
@@ -62,7 +69,8 @@ const ReservationForm = () => {
     fullName: "",
     email: "",
     numberOfGuests: "",
-    eventDate: "",
+    eventDate: new Date(),
+    eventTime: "",
     specialRequests: "",
     reservationType: "repas",
   });
@@ -76,6 +84,39 @@ const ReservationForm = () => {
       ...formData,
       [name]: value,
     });
+
+    console.log(formData.eventDate, formData.eventTime);
+  };
+
+  const isWeekday = (date: any) => {
+    const day = date.getDay();
+    const month = date.getMonth();
+    const dayOfMonth = date.getDate();
+    const year = date.getFullYear();
+
+    const isAug31 = month === 7 && dayOfMonth === 31;
+    const isNov16ToDec2 =
+      year === 2024 &&
+      ((month === 10 && dayOfMonth >= 16) ||
+        month === 11 ||
+        (month === 11 && dayOfMonth <= 2));
+
+    return day !== 0 && !isAug31 && !isNov16ToDec2;
+  };
+
+  const isRestaurantOpen = (time: any) => {
+    const hour = time.getHours();
+    const minute = time.getMinutes();
+    return (
+      hour === 12 ||
+      hour === 13 ||
+      (hour === 14 && minute === 0) ||
+      hour === 18 ||
+      hour === 19 ||
+      hour === 20 ||
+      hour === 21 ||
+      (hour === 22 && minute === 0)
+    );
   };
 
   const handleSubmit = (e: any) => {
@@ -86,22 +127,26 @@ const ReservationForm = () => {
       email,
       numberOfGuests,
       eventDate,
+      eventTime,
       specialRequests,
       reservationType,
     } = formData;
 
     const mailTo = "floridablanca22@gmail.com";
-    const subject = `Table Reservation - For ${eventDate}`;
-    const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
+    const subject = `Table Reservation - Le ${eventDate} à ${eventTime}`;
+    const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}, ${eventTime}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
 
-    window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    // window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
+    //   subject
+    // )}&body=${encodeURIComponent(body)}`;
+
+    console.log(subject, body);
 
     setSucceeded(true);
   };
 
-  const translation = translations[selectedLanguage as keyof typeof translations];
+  const translation =
+    translations[selectedLanguage as keyof typeof translations];
 
   return (
     <>
@@ -191,18 +236,24 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                  className="w-full block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
-                <input
-                  type="datetime-local"
-                  id="eventDate"
-                  name="eventDate"
-                  value={formData.eventDate}
-                  onChange={handleChange}
+
+                <DatePicker
+                  showTimeSelect
+                  selected={formData.eventDate}
+                  onChange={(date: any) =>
+                    handleChange({
+                      target: { name: "eventDate", value: date },
+                    })
+                  }
+                  minDate={new Date()}
+                  filterDate={isWeekday}
+                  filterTime={isRestaurantOpen}
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  required
+                  locale="fr"
                 />
               </div>
             </div>
@@ -223,7 +274,7 @@ const ReservationForm = () => {
                 required
               >
                 <option value="repas">{translation.repas}</option>
-                <option value="evenement">{translation.evenement}</option> 
+                <option value="evenement">{translation.evenement}</option>
               </select>
             </div>
 

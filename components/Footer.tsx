@@ -7,7 +7,7 @@ function Footer() {
       <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between justify-center items-center p-4 space-y-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#0A3C74] flex flex-col items-center justify-center">
           <h4 className="font-spaceTransit text-5xl">HORAIRES</h4>
-          <h2 className="font-spaceTransit text-3xl">En vacances jusqu'au 4 mars 2025</h2>
+          <h2 className="font-spaceTransit text-3xl">En vacances jusqu'au 3 mars 2025</h2>
           <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Juillet - Août</li>

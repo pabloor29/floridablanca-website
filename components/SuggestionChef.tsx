@@ -95,7 +95,7 @@ function SuggestionChef() {
           <PlatSuggest
             src="/casserole-poivron.webp"
             alt="casserole de poivrons"
-            title="CASSEROLLE DE POIVRON"
+            title="PIMIENTOS DE PADRON"
           />
           <PlatSuggest
             src="/assiette-poulpe.webp"

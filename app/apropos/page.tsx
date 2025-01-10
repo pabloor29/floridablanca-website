@@ -118,7 +118,7 @@ function AboutPage() {
               </div>
             </div>
 
-            {/* <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
+            <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="text-5xl font-medium font-spaceTransit">
                   Le patio
@@ -129,8 +129,8 @@ function AboutPage() {
                   originales les unes que les autres, il offre une atmosphère
                   paisible et relaxante, parfaitement adaptée à des occasions
                   mémorables. De plus, l'ambiance conviviale de soirées d'été ou
-                  de tout type ajoute une touche festive à cet espace à l'air
-                  libre ou couvert. Réservez le patio pour célébrer vos moments
+                  de tout type ajoute une touche festive à cet espace
+                  couvert. Réservez le patio pour célébrer vos moments
                   précieux avec style, authenticité et une petite touche
                   espagnole.
                 </article>
@@ -142,7 +142,7 @@ function AboutPage() {
                   className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

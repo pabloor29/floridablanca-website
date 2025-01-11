@@ -137,7 +137,7 @@ function AboutPage() {
               </div>
               <div className="lg:w-2/3">
                 <img
-                  src="/IMG_0219.webp"
+                  src="/patio_new.webp"
                   alt=""
                   className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />

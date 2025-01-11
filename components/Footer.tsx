@@ -6,8 +6,7 @@ function Footer() {
     <footer className="w-full bg-[#f0f5ff] flex flex-col justify-center items-center">
       <div className="flex flex-col lg:flex-row w-5/6 lg:justify-between justify-center items-center p-4 space-y-12 lg:space-y-0">
         <div className="lg:w-1/3 w-full text-[#0A3C74] flex flex-col items-center justify-center">
-          <h4 className="font-spaceTransit text-5xl">HORAIRES</h4>
-          <h2 className="font-spaceTransit text-3xl">En vacances jusqu'au 3 mars 2025</h2>
+          <h4 className="font-spaceTransit text-5xl mb-3">HORAIRES</h4>
           <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Juillet - Août</li>
@@ -17,7 +16,8 @@ function Footer() {
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center">
-              <li className="font-bold text-lg">Septembre - Juin</li>
+              <li className="font-bold text-lg">Septembre - Octobre</li>
+              <li className="font-bold text-lg">Mars - Juin</li>
               <p>Mardi - Samedi</p>
               <p>
                 12:00 - 14:00 <br /> 18:00 - 22:00

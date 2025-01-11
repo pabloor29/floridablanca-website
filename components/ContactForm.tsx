@@ -100,14 +100,10 @@ const ReservationForm = () => {
       ((month === 10 && dayOfMonth >= 16) ||
         month === 11 ||
         (month === 11 && dayOfMonth <= 2));
-    const isJan1ToMar3 =
-        year === 2025 &&
-        ((month === 0 && dayOfMonth >= 1) ||
-         month === 1 ||             
-         (month === 2 && dayOfMonth <= 3));
+    const isHolidays = (month === 10 || month === 11 || month === 0 || month === 1);
     const isSeptToJuneMonday = day === 1 && (month >= 8 || month <= 5);
 
-    return day !== 0 && !isAug31 && !isNov16ToDec2 && !isSeptToJuneMonday && !isJan1ToMar3;
+    return day !== 0 && !isAug31 && !isNov16ToDec2 && !isSeptToJuneMonday && !isHolidays;
   };
 
   const isRestaurantOpen = (time: any) => {

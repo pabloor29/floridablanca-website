@@ -114,7 +114,6 @@ function AboutPage() {
                   ouverte, offrant ainsi à nos convives une expérience immersive
                   où ils peuvent voir notre talentueux chef préparer chaque plat
                   avec passion et expertise.
-                  le caca
                 </article>
               </div>
             </div>

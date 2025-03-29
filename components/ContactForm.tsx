@@ -1,11 +1,13 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState , useEffect , useRef } from "react";
 import CustomTimePicker from "./CustomTimePicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
+import emailjs from "@emailjs/browser";
+
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
@@ -13,55 +15,64 @@ setDefaultLocale("fr");
 const ReservationForm = () => {
   const translations = {
     fr: {
-      title: "demande de reservation",
-      fullNameLabel: "Nom Complet",
+      title: "Demande de reservation",
+      fullNameLabel: "Nom complet",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Nombre de Convives",
-      eventDateLabel: "Date et Heure",
+      numberOfGuestsLabel: "Invites",
+      eventDateLabel: "Date",
+      eventTimeLabel: "Heure",
 
-      reservationTypeLabel: "Type de Reservation",
-      repas: "Repas",
-      evenement: "Evenement",
-
-      specialRequestsLabel: "Demandes Speciales",
+      specialRequestsLabel: "Demandes speciales",
       submitButton: "ENVOYER LA DEMANDE",
 
-      afterSentMessage: `Votre demande de réservation a bien été envoyé ! Vous allez
-      recevoir une confirmation d'ici peu 😋`,
+      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+
+      alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
     },
     en: {
-      title: "reservation request",
-      fullNameLabel: "Full Name",
+      title: "Reservation request",
+      fullNameLabel: "Full name",
       emailLabel: "Email",
-      numberOfGuestsLabel: "Number of Guests",
-      eventDateLabel: "Date and Time",
+      numberOfGuestsLabel: "Guests",
+      eventDateLabel: "Date",
+      eventTimeLabel: "Time",
 
-      reservationTypeLabel: "Reservation Type",
-      repas: "Meal",
-      evenement: "Event",
-
-      specialRequestsLabel: "Special Requests",
+      specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
 
-      afterSentMessage: `Your reservation request has been sent! You will
-      receive confirmation shortly 😋`,
+      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+
+      alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
     },
     es: {
-      title: "solicitud de reserva",
-      fullNameLabel: "Nombre Completo",
-      emailLabel: "Correo Electrónico",
-      numberOfGuestsLabel: "Numero de Invitados",
-      eventDateLabel: "Fecha y Hora",
+      title: "Solicitud de reserva",
+      fullNameLabel: "Nombre completo",
+      emailLabel: "Correo electronico",
+      numberOfGuestsLabel: "Invitados",
+      eventDateLabel: "Fecha",
+      eventTimeLabel: "Hora",
 
-      reservationTypeLabel: "Tipo de Reserva",
-      repas: "Comida",
-      evenement: "Evento",
-
-      specialRequestsLabel: "Solicitudes Especiales",
+      specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
 
-      afterSentMessage: `¡Su solicitud de reserva ha sido enviada! Lo harás
-      recibir confirmación en breve 😋`,
+      afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
+
+      alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
+    },
+    it: {
+      title: "Richiesta di prenotazione",
+      fullNameLabel: "Nome completo",
+      emailLabel: "Email",
+      numberOfGuestsLabel: "Ospiti",
+      eventDateLabel: "Data",
+      eventTimeLabel: "Ora",
+
+      specialRequestsLabel: "Richieste speciali",
+      submitButton: "INVIA LA RICHIESTA",
+
+      afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
+
+      alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
     },
   };
 
@@ -145,8 +156,74 @@ const ReservationForm = () => {
     setSucceeded(true);
   };
 
-  const translation =
-    translations[selectedLanguage as keyof typeof translations];
+  useEffect(() => {
+    const dateInput = document.getElementById("datePicker");
+
+    const handleDateChange = (e: any) => {
+      const date = new Date(e.target.value);
+      const day = date.getDay();
+
+      if (day === 0 || day === 1) {
+        //alert("Restaurant fermé tous les lundis et dimanches.");
+        alert(`${translation.alertRestaurantClose}`);
+        e.target.value = "";
+      }
+    };
+
+    if (dateInput) {
+      dateInput.addEventListener("input", handleDateChange);
+    }
+
+    // Nettoyage de l'event listener
+    return () => {
+      if (dateInput) {
+        dateInput.removeEventListener("input", handleDateChange);
+      }
+    };
+  }, []);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!formRef.current) {
+        console.error("Le formulaire n'est pas disponible !");
+        return;
+    }
+
+    const formElement = formRef.current;
+
+    Promise.all([
+        emailjs.sendForm("service_floridablanca", "template_resa_001", formElement, "Hj5zsN3OJSMAXQ9TV"),
+        emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+    ])
+    .then(() => {
+        formRef.current?.reset();
+        setSucceeded(true);
+    })
+    .catch(error => {
+        console.error("Erreur lors de l'envoi des emails :", error);
+    });
+};
+
+    const [isOpen, setIsOpen] = useState(false); 
+    const [selectedValue, setSelectedValue] = useState("");
+  
+    const options = ["12:00", "12:30", "13:00", "13:30", "14:00",
+                     "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
+                    ];
+  
+    const handleSelect = (value: string) => {
+      setSelectedValue(value);
+      setIsOpen(false);
+    };
+  
+    const toggleDropdown = () => {
+      setIsOpen((prev) => !prev);
+    };
+
+    const translation = translations[selectedLanguage as keyof typeof translations];
 
   return (
     <>
@@ -160,9 +237,13 @@ const ReservationForm = () => {
       ) : (
         <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">
           <form
-            onSubmit={handleSubmit}
+            ref={formRef}
+            onSubmit={sendEmail}
+            //onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
+            <input type="hidden" name="company" value="FLORIDABLANCA" />
+            <input type="hidden" name="emailCompany" value="floridablanca22@gmail.com" />
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit leading-none">
                 {translation.title}
@@ -236,46 +317,53 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="w-full block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                  className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
-
-                <DatePicker
-                  showTimeSelect
-                  selected={formData.eventDate}
-                  onChange={(date: any) =>
-                    handleChange({
-                      target: { name: "eventDate", value: date },
-                    })
-                  }
-                  minDate={new Date()}
-                  filterDate={isWeekday}
-                  filterTime={isRestaurantOpen}
+                <input 
+                  type="date" 
+                  id="datePicker" 
+                  name="eventDate" 
+                  required
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  locale="fr"
                 />
               </div>
-            </div>
 
-            <div className="lg:w-1/2 w-full">
-              <label
-                htmlFor="reservationType"
-                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
-              >
-                {translation.reservationTypeLabel}
-              </label>
-              <select
-                id="reservationType"
-                name="reservationType"
-                value={formData.reservationType}
-                onChange={handleChange}
-                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                required
-              >
-                <option value="repas">{translation.repas}</option>
-                <option value="evenement">{translation.evenement}</option>
-              </select>
+              <div className="relative lg:w-1/2 w-full">
+                <label
+                  htmlFor="eventTime"
+                  className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                >
+                  {translation.eventTimeLabel}
+                </label>
+                <input
+                  type="text"
+                  name="eventTime"
+                  value={selectedValue}
+                  onClick={toggleDropdown}
+                  onChange={(e) => setSelectedValue(e.target.value)}
+                  className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  placeholder="Choisir une option"
+                />
+                
+                {isOpen && (
+                  <ul
+                    className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                    style={{ maxHeight: "200px", overflowY: "auto" }}
+                  >
+                    {options.map((option, index) => (
+                      <li
+                        key={index}
+                        className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
+                        onClick={() => handleSelect(option)}
+                      >
+                        {option}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
 
             <div>

@@ -70,7 +70,7 @@ const ReservationDetails = () => {
       reservationCommentInput.value = reservationComment;
     }
 
-    emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "Hj5zsN3OJSMAXQ9TV")
+    emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "sCSQ7jBUlaWzqKf5_")
       .then(() => {
         formRef.current?.reset();
         alert(`E-mail envoyé avec succès !`);

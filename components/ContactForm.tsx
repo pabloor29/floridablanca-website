@@ -164,28 +164,32 @@ const ReservationForm = () => {
     const dateInput = document.getElementById("datePicker");
 
     const handleDateChange = (e: any) => {
-        const date = new Date(e.target.value);
-        const day = date.getDay();
+      const date = new Date(e.target.value);
+      const day = date.getDay();
+      const month = date.getMonth();
 
-        // Si la date sélectionnée est un lundi (1) ou un dimanche (0)
-        if (day === 0 || day === 1) {
-            //alert(`${translation.alertRestaurantClose}`);
-            e.target.value = ""; // Réinitialise la date après l'alerte
-        }
+      if ((day == 0 && month == 6) || (day == 0 && month == 7))
+      {
+        e.target.value = "";
+      }
+      else if ((day === 0 || day === 1) && (month != 6) && (month != 7))
+      {
+        e.target.value = "";
+      }
     };
 
-    // Ajoute l'événement "change" pour valider la sélection
-    if (dateInput) {
-        dateInput.addEventListener("change", handleDateChange);
+    if (dateInput)
+    {
+      dateInput.addEventListener("change", handleDateChange);
     }
 
-    // Nettoyage après le démantèlement du composant
     return () => {
-        if (dateInput) {
-            dateInput.removeEventListener("change", handleDateChange);
-        }
+      if (dateInput)
+      {
+        dateInput.removeEventListener("change", handleDateChange);
+      }
     };
-}, []);
+  }, []);
 
   const formRef = useRef<HTMLFormElement>(null);
 

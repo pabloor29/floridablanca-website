@@ -20,6 +20,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Invites",
       eventDateLabel: "Date",
+      infoDateLabel: "(Fermé lundi et dimanche)",
       eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes speciales",
@@ -35,6 +36,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Guests",
       eventDateLabel: "Date",
+      infoDateLabel: "(Closed on Monday and Sunday)",
       eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
@@ -50,6 +52,7 @@ const ReservationForm = () => {
       emailLabel: "Correo electronico",
       numberOfGuestsLabel: "Invitados",
       eventDateLabel: "Fecha",
+      infoDateLabel: "(Cerrado los lunes y domingos)",
       eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
@@ -65,6 +68,7 @@ const ReservationForm = () => {
       emailLabel: "Email",
       numberOfGuestsLabel: "Ospiti",
       eventDateLabel: "Data",
+      infoDateLabel: "(Chiuso il lunedì e la domenica)",
       eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",
@@ -160,27 +164,28 @@ const ReservationForm = () => {
     const dateInput = document.getElementById("datePicker");
 
     const handleDateChange = (e: any) => {
-      const date = new Date(e.target.value);
-      const day = date.getDay();
+        const date = new Date(e.target.value);
+        const day = date.getDay();
 
-      if (day === 0 || day === 1) {
-        //alert("Restaurant fermé tous les lundis et dimanches.");
-        alert(`${translation.alertRestaurantClose}`);
-        e.target.value = "";
-      }
+        // Si la date sélectionnée est un lundi (1) ou un dimanche (0)
+        if (day === 0 || day === 1) {
+            //alert(`${translation.alertRestaurantClose}`);
+            e.target.value = ""; // Réinitialise la date après l'alerte
+        }
     };
 
+    // Ajoute l'événement "change" pour valider la sélection
     if (dateInput) {
-      dateInput.addEventListener("input", handleDateChange);
+        dateInput.addEventListener("change", handleDateChange);
     }
 
-    // Nettoyage de l'event listener
+    // Nettoyage après le démantèlement du composant
     return () => {
-      if (dateInput) {
-        dateInput.removeEventListener("input", handleDateChange);
-      }
+        if (dateInput) {
+            dateInput.removeEventListener("change", handleDateChange);
+        }
     };
-  }, []);
+}, []);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -258,6 +263,7 @@ const ReservationForm = () => {
                 <option value="fr">🇫🇷</option>
                 <option value="en">🇬🇧</option>
                 <option value="es">🇪🇸</option>
+                <option value="it">🇮🇹</option>
               </select>
             </div>
             <div>
@@ -330,6 +336,9 @@ const ReservationForm = () => {
                   required
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                 />
+                <p className="absolute w-full text-sm pt-1">
+                  {translation.infoDateLabel}
+                </p>
               </div>
 
               <div className="relative lg:w-1/2 w-full">

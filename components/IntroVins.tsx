@@ -84,7 +84,7 @@ function IntroVins() {
           un vin rouge produit par un vigneron local, cher ami de notre chef. Ce
           dernier représente l'authenticité et la passion du savoir-faire
           régional. Arborant une étiquette unique, créée spécialement pour le
-          restaurant du Floridablanca par un ami cher au chef, ce vin incarne
+          restaurant du Floridablanca par un ami du chef, ce vin incarne
           parfaitement l'âme et l'identité de notre établissement. Découvrez une
           expérience gustative qui célèbre l'amitié, la tradition et l'amour du
           vin.

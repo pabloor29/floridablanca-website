@@ -56,7 +56,7 @@ function ContactPage() {
                         </div>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Chèques bancaires et postaux</p>
+                        <p>Chèques vacances</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -70,19 +70,6 @@ function ContactPage() {
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>Espèces</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="scale-125">
-                          <Ticket />
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Ticket Restaurant</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>

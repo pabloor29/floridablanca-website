@@ -137,7 +137,8 @@ const ReservationDetails = () => {
         <input type="hidden" name="emailCompany" value="floridablanca22@gmail.com" />
         <input type="hidden" name="reservationType" value={reservationType} />
         <input type="hidden" name="reservationComment" value={reservationComment} />
-        <input type="hidden" name="eventDateTXT" value={reservationInfo?.date || ""} />
+        <input type="hidden" name="eventDateTXT
+        " value={reservationInfo?.date || ""} />
         <input type="hidden" name="eventTime" value={reservationInfo?.heure || ""} />
         <input type="hidden" name="numberOfGuests" value={reservationInfo?.invites || ""} />
         <input type="hidden" name="fullName" value={reservationInfo?.nom || ""} />

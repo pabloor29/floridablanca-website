@@ -160,19 +160,27 @@ const ReservationForm = () => {
     setSucceeded(true);
   };
 
+  const [eventDateTXT, setEventDateTXT] = useState("");
+
   useEffect(() => {
     const dateInput = document.getElementById("datePicker");
 
     const handleDateChange = (e: any) => {
       const date = new Date(e.target.value);
       const day = date.getDay();
-      const month = date.getMonth();
+      const numDay = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
 
-      if ((day == 0 && month == 6) || (day == 0 && month == 7))
+      const twoDigits = (num: number) => num.toString().padStart(2, "0");
+
+      setEventDateTXT(`${twoDigits(numDay)}-${twoDigits(month)}-${year}`);
+
+      if ((day == 0 && month == 7) || (day == 0 && month == 8))
       {
         e.target.value = "";
       }
-      else if ((day === 0 || day === 1) && (month != 6) && (month != 7))
+      else if ((day === 0 || day === 1) && (month != 7) && (month != 8))
       {
         e.target.value = "";
       }
@@ -251,6 +259,7 @@ const ReservationForm = () => {
             //onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
+            <input type="hidden" name="eventDateTXT" value={eventDateTXT} />
             <input type="hidden" name="company" value="FLORIDABLANCA" />
             <input type="hidden" name="emailCompany" value="floridablanca22@gmail.com" />
             <input type="hidden" name="reservationType" value="EN ATTENTE DE CONFIRMATION" />

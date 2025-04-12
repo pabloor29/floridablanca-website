@@ -45,7 +45,7 @@ const ReservationDetails = () => {
 
     // sendEmail();
 
-    alert('Confirmation de réservation.');
+    //alert('Confirmation de réservation.');
   };
 
   const handleReservationRefuse = () => {
@@ -58,7 +58,7 @@ const ReservationDetails = () => {
 
     //sendEmail();
 
-    alert('Refus de réservation.');
+    //alert('Refus de réservation.');
   };
 
   useEffect(() => {
@@ -86,11 +86,11 @@ const ReservationDetails = () => {
     emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "sCSQ7jBUlaWzqKf5_")
       .then(() => {
         formRef.current?.reset();
-        alert(`E-mail envoyé avec succès !`);
+        // alert(`E-mail envoyé avec succès !`);
       })
       .catch(error => {
         console.error("Erreur lors de l'envoi des emails :", error);
-        alert(`Echec de l'envoie !`);
+        // alert(`Echec de l'envoie !`);
       });
   };
 
@@ -137,7 +137,7 @@ const ReservationDetails = () => {
         <input type="hidden" name="emailCompany" value="floridablanca22@gmail.com" />
         <input type="hidden" name="reservationType" value={reservationType} />
         <input type="hidden" name="reservationComment" value={reservationComment} />
-        <input type="hidden" name="eventDate" value={reservationInfo?.date || ""} />
+        <input type="hidden" name="eventDateTXT" value={reservationInfo?.date || ""} />
         <input type="hidden" name="eventTime" value={reservationInfo?.heure || ""} />
         <input type="hidden" name="numberOfGuests" value={reservationInfo?.invites || ""} />
         <input type="hidden" name="fullName" value={reservationInfo?.nom || ""} />

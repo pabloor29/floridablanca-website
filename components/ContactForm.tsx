@@ -15,7 +15,7 @@ setDefaultLocale("fr");
 const ReservationForm = () => {
   const translations = {
     fr: {
-      title: "Demande de réservation",
+      title: "Demande de reservation",
       fullNameLabel: "Nom complet",
       emailLabel: "Email",
       numberOfGuestsLabel: "Nombre de personnes",
@@ -23,7 +23,7 @@ const ReservationForm = () => {
       infoDateLabel: "(Fermé lundi et dimanche)",
       eventTimeLabel: "Heure",
 
-      specialRequestsLabel: "Demandes spéciales",
+      specialRequestsLabel: "Demandes speciales",
       submitButton: "ENVOYER LA DEMANDE",
 
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
@@ -42,15 +42,15 @@ const ReservationForm = () => {
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
 
-      afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
+      afterSentMessage: `Thank you for your booking request! A confirmation email will be sent to you shortly. Please check your mailbox.`,
 
       alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
     },
     es: {
       title: "Solicitud de reserva",
       fullNameLabel: "Nombre completo",
-      emailLabel: "Correo electrónico",
-      numberOfGuestsLabel: "Número de personas",
+      emailLabel: "Correo electronico",
+      numberOfGuestsLabel: "Numero de personas",
       eventDateLabel: "Fecha",
       infoDateLabel: "(Cerrado los lunes y domingos)",
       eventTimeLabel: "Hora",

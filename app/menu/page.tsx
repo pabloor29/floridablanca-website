@@ -13,17 +13,17 @@ function MenuPage() {
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">
           <img
             className="w-full h-auto object-cover"
-            src="/carteETE2024-2.webp"
+            src="/carteETE2025-1.webp"
             alt=""
           />
           <img
             className="w-full h-auto object-cover"
-            src="/carteETE2024-3.webp"
+            src="/carteETE2025-2.webp"
             alt=""
           />
           <img
             className="w-full h-auto object-cover"
-            src="/carteETE2024-4.webp"
+            src="/carteETE2025-3.webp"
             alt=""
           />
         </div>

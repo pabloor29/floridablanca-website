@@ -21,7 +21,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
       infoDateLabel: "(Fermé lundi et dimanche)",
-      infoDateLabelSummer: "(Fermé le lundi)",
+      infoDateLabelSummer: "(Fermé le dimanche)",
       eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes speciales",
@@ -38,7 +38,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
       infoDateLabel: "(Closed on Monday and Sunday)",
-      infoDateLabelSummer: "(Closed on Monday)",
+      infoDateLabelSummer: "(Closed on Sunday)",
       eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
@@ -55,7 +55,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Numero de personas",
       eventDateLabel: "Fecha",
       infoDateLabel: "(Cerrado los lunes y domingos)",
-      infoDateLabelSummer: "(Cerrado los lunes)",
+      infoDateLabelSummer: "(Cerrado los domingos)",
       eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
@@ -72,7 +72,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
       infoDateLabel: "(Chiuso il lunedì e la domenica)",
-      infoDateLabelSummer: "(Chiuso il lunedì)",
+      infoDateLabelSummer: "(Chiuso la domenica)",
       eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",

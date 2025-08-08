@@ -10,7 +10,11 @@ function Footer() {
           <ul className="flex items-center justify-between space-x-10">
             <div className="flex flex-col items-center justify-center text-center">
               <li className="font-bold text-lg">Juillet - Août</li>
-              <p>Lundi - Samedi</p>
+              <p>Lundi</p>
+              <p>
+                18:00 - 22:00
+              </p>
+              <p className="mt-2">Mardi - Samedi</p>
               <p>
                 12:00 - 14:00 <br /> 18:00 - 22:00
               </p>

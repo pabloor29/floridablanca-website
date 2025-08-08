@@ -21,7 +21,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
       infoDateLabel: "(Fermé lundi et dimanche)",
-      infoDateLabelSummer: "(Fermé le dimanche)",
+      infoDateLabelSummer: "(Fermé dimanche et lundi midi)",
       eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes speciales",
@@ -38,7 +38,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
       infoDateLabel: "(Closed on Monday and Sunday)",
-      infoDateLabelSummer: "(Closed on Sunday)",
+      infoDateLabelSummer: "(Closed on Sunday and Monday lunchtime)",
       eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
@@ -55,7 +55,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Numero de personas",
       eventDateLabel: "Fecha",
       infoDateLabel: "(Cerrado los lunes y domingos)",
-      infoDateLabelSummer: "(Cerrado los domingos)",
+      infoDateLabelSummer: "(Cerrado el domingo y el lunes al mediodía)",
       eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
@@ -72,7 +72,7 @@ const ReservationForm = () => {
       numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
       infoDateLabel: "(Chiuso il lunedì e la domenica)",
-      infoDateLabelSummer: "(Chiuso la domenica)",
+      infoDateLabelSummer: "(Chiuso la domenica e il lunedì a pranzo)",
       eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",
@@ -107,38 +107,7 @@ const ReservationForm = () => {
     console.log(formData.eventDate, formData.eventTime);
   };
 
-  const isWeekday = (date: any) => {
-    const day = date.getDay();
-    const month = date.getMonth();
-    const dayOfMonth = date.getDate();
-    const year = date.getFullYear();
-
-    const isAug31 = month === 7 && dayOfMonth === 31;
-    const isNov16ToDec2 =
-      year === 2024 &&
-      ((month === 10 && dayOfMonth >= 16) ||
-        month === 11 ||
-        (month === 11 && dayOfMonth <= 2));
-    const isHolidays = (month === 10 || month === 11 || month === 0 || month === 1);
-    const isSeptToJuneMonday = day === 1 && (month >= 8 || month <= 5);
-
-    return day !== 0 && !isAug31 && !isNov16ToDec2 && !isSeptToJuneMonday && !isHolidays;
-  };
-
-  const isRestaurantOpen = (time: any) => {
-    const hour = time.getHours();
-    const minute = time.getMinutes();
-    return (
-      hour === 12 ||
-      hour === 13 ||
-      (hour === 14 && minute === 0) ||
-      hour === 18 ||
-      hour === 19 ||
-      hour === 20 ||
-      hour === 21 ||
-      (hour === 22 && minute === 0)
-    );
-  };
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -171,6 +140,7 @@ const ReservationForm = () => {
 
     const handleDateChange = (e: any) => {
       const date = new Date(e.target.value);
+      setSelectedDate(date);
       const day = date.getDay();
       const numDay = date.getDate();
       const month = date.getMonth() + 1;
@@ -231,9 +201,12 @@ const ReservationForm = () => {
     const [isOpen, setIsOpen] = useState(false); 
     const [selectedValue, setSelectedValue] = useState("");
   
-    const options = ["12:00", "12:30", "13:00", "13:30", "14:00",
-                     "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
-                    ];
+    const optionsTimeAllDay = ["12:00", "12:30", "13:00", "13:30", "14:00",
+                              "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
+                              ];
+
+    const optionsTimeHalfDayEvening = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
+                               ];
   
     const handleSelect = (value: string) => {
       setSelectedValue(value);
@@ -352,10 +325,29 @@ const ReservationForm = () => {
                   name="eventDate" 
                   required
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  onChange={(e) => {
+                    const newDate = new Date(e.target.value);
+                    setSelectedDate(newDate);       // ✅ met à jour la date sélectionnée
+                    setSelectedValue("");           // ✅ réinitialise l’horaire
+                    setEventDateTXT(() => {
+                      const day = newDate.getDate();
+                      const month = newDate.getMonth() + 1;
+                      const year = newDate.getFullYear();
+                      const twoDigits = (n: number) => n.toString().padStart(2, "0");
+                      return `${twoDigits(day)}-${twoDigits(month)}-${year}`;
+                    });
+                  }}
                 />
-                <p className="absolute w-content text-sm pt-1">
-                  {translation.infoDateLabelSummer}
-                </p>
+                { selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
+                  <p className="absolute w-content text-sm pt-1">
+                    {translation.infoDateLabelSummer}
+                  </p>
+                ):(
+                  <p className="absolute w-content text-sm pt-1">
+                    {translation.infoDateLabel}
+                  </p>
+                )
+                }
               </div>
 
               <div className="relative lg:w-1/2 w-full">
@@ -375,22 +367,40 @@ const ReservationForm = () => {
                   placeholder="Choisir une option"
                 />
                 
-                {isOpen && (
-                  <ul
-                    className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
-                    style={{ maxHeight: "200px", overflowY: "auto" }}
-                  >
-                    {options.map((option, index) => (
-                      <li
-                        key={index}
-                        className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
-                        onClick={() => handleSelect(option)}
-                      >
-                        {option}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                {isOpen && 
+                (
+                  selectedDate.getDay() === 1 ? (
+                    <ul
+                      className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                      style={{ maxHeight: "200px", overflowY: "auto" }}
+                    >
+                      {optionsTimeHalfDayEvening.map((option, index) => (
+                        <li
+                          key={index}
+                          className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
+                          onClick={() => handleSelect(option)}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  ):(
+                    <ul
+                      className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
+                      style={{ maxHeight: "200px", overflowY: "auto" }}
+                    >
+                      {optionsTimeAllDay.map((option, index) => (
+                        <li
+                          key={index}
+                          className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
+                          onClick={() => handleSelect(option)}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                )}            
               </div>
             </div>
 

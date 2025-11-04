@@ -3,7 +3,7 @@ import { BadgeCheck } from "lucide-react";
 import React, { useState , useEffect , useRef } from "react";
 import CustomTimePicker from "./CustomTimePicker";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+//import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
 import emailjs from "@emailjs/browser";
@@ -22,6 +22,7 @@ const ReservationForm = () => {
       eventDateLabel: "Date",
       infoDateLabel: "(Fermé lundi et dimanche)",
       infoDateLabelSummer: "(Fermé dimanche et lundi midi)",
+      infoDateLabelHollidays: "(Fermé en novembre, décembre, janvier et février)",
       eventTimeLabel: "Heure",
 
       specialRequestsLabel: "Demandes speciales",
@@ -39,6 +40,7 @@ const ReservationForm = () => {
       eventDateLabel: "Date",
       infoDateLabel: "(Closed on Monday and Sunday)",
       infoDateLabelSummer: "(Closed on Sunday and Monday lunchtime)",
+      infoDateLabelHollidays: "(Closed in November, December, January, and February)",
       eventTimeLabel: "Time",
 
       specialRequestsLabel: "Special requests",
@@ -56,6 +58,7 @@ const ReservationForm = () => {
       eventDateLabel: "Fecha",
       infoDateLabel: "(Cerrado los lunes y domingos)",
       infoDateLabelSummer: "(Cerrado el domingo y el lunes al mediodía)",
+      infoDateLabelHollidays: "(Cerrado en noviembre, diciembre, enero y febrero)",
       eventTimeLabel: "Hora",
 
       specialRequestsLabel: "Solicitudes especiales",
@@ -73,6 +76,7 @@ const ReservationForm = () => {
       eventDateLabel: "Data",
       infoDateLabel: "(Chiuso il lunedì e la domenica)",
       infoDateLabelSummer: "(Chiuso la domenica e il lunedì a pranzo)",
+      infoDateLabelHollidays: "(Chiuso a novembre, dicembre, gennaio e febbraio)",
       eventTimeLabel: "Ora",
 
       specialRequestsLabel: "Richieste speciali",
@@ -155,6 +159,10 @@ const ReservationForm = () => {
         e.target.value = "";
       }
       else if ((day === 0 || day === 1) && (month != 7) && (month != 8))
+      {
+        e.target.value = "";
+      }
+      else if (month == 11 || month == 12 || month == 1 || month == 2)
       {
         e.target.value = "";
       }
@@ -341,6 +349,10 @@ const ReservationForm = () => {
                 { selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
                   <p className="absolute w-content text-sm pt-1">
                     {translation.infoDateLabelSummer}
+                  </p>
+                ) : selectedDate.getMonth() + 1 === 11 || selectedDate.getMonth() + 1 === 12 || selectedDate.getMonth() + 1 === 1 || selectedDate.getMonth() + 1 === 2 ? (
+                  <p className="absolute w-content text-sm pt-1">
+                    {translation.infoDateLabelHollidays}
                   </p>
                 ):(
                   <p className="absolute w-content text-sm pt-1">

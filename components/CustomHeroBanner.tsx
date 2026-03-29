@@ -23,7 +23,7 @@ function CustomHeroBanner(props: any) {
       <div className="w-full h-full bg-black/50 z-40 absolute"></div>
       <img
         src={props.img}
-        alt=""
+        alt={props.title ? `${props.title} - FloridaBlanca Restaurant Tapas Carcassonne` : "FloridaBlanca - Restaurant Tapas Carcassonne"}
         className="h-full w-full object-cover absolute z-30 grayscale"
       />
 

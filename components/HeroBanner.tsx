@@ -24,7 +24,7 @@ function HeroBanner() {
       <div className="h-screen w-full flex justify-center items-center bg-black/60 absolute z-10"></div>
       <img
         src="/bar-black.webp"
-        alt=""
+        alt="Le bar du restaurant FloridaBlanca à Carcassonne, spécialités tapas et cuisine méditerranéenne"
         className="w-full h-screen object-cover absolute z-0"
       />
       <div className="relative z-20 flex flex-col items-center justify-center leading-none">

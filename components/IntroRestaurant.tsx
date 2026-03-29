@@ -56,7 +56,7 @@ function IntroRestaurant() {
         >
           <img
             src="/octopus-drawing-blue.webp"
-            alt=""
+            alt="Illustration poulpe - FloridaBlanca bar à poulpe et tapas Carcassonne"
             className="-scale-x-100"
           />
         </motion.div>

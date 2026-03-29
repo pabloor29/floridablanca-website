@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -9,6 +10,19 @@ import {
 } from "@/components/ui/tooltip";
 import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Contact & Horaires - FloridaBlanca Carcassonne",
+  description: "Contactez FloridaBlanca : 22 rue Trivalle, 11000 Carcassonne. Tél : 04 30 34 58 55. Ouvert mardi–samedi 12h-14h & 18h-22h (juillet–août : lundi–samedi). Réservation et informations pratiques.",
+  alternates: {
+    canonical: "https://www.floridablanca.fr/contact",
+  },
+  openGraph: {
+    title: "Contact & Horaires - FloridaBlanca Carcassonne",
+    description: "22 rue Trivalle, 11000 Carcassonne. Tél : 04 30 34 58 55. Ouvert mardi–samedi midi et soir. Wifi, animaux acceptés, anglais et espagnol parlés.",
+    url: "https://www.floridablanca.fr/contact",
+  },
+};
 
 function ContactPage() {
   return (
@@ -111,7 +125,7 @@ function ContactPage() {
         </div>
 
         <div className="lg:w-1/2 flex items-center justify-center lg:h-[750px] overflow-hidden">
-          <img src="/florida-map-3.png" alt="" />
+          <img src="/florida-map-3.png" alt="Carte et localisation du restaurant FloridaBlanca - 22 rue Trivalle, Carcassonne" />
         </div>
       </div>
 

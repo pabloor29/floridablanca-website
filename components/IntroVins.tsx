@@ -64,7 +64,7 @@ function IntroVins() {
       >
         <img
           src="/wine_poulpe.webp"
-          alt=""
+          alt="L'Encre du Poulpe - vin rouge local sélectionné par le chef du FloridaBlanca, Carcassonne"
           className="lg:absolute lg:w-7/12 w-2/3 rotate-[30deg] z-30 drop-shadow-[-15px_15px_3px_rgba(0,0,0,0.25)]"
         />
       </motion.div>
@@ -105,6 +105,7 @@ function IntroVins() {
         variants={imagesVariants}
         src="/octopus-tentacule-1.webp"
         alt=""
+        aria-hidden="true"
         className="absolute lg:w-1/3 top-56 right-[15vw] lg:top-20 rotate-[200deg] lg:rotate-0 scale-150 lg:scale-100 lg:right-0 z-0 opacity-30"
       />
     </div>

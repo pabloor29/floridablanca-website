@@ -60,6 +60,7 @@ function SuggestionChef() {
       <img
         src="/octopus-drawing-blue.webp"
         alt=""
+        aria-hidden="true"
         className="absolute opacity-5 z-0 scale-150 overflow-x-hidden"
       />
 

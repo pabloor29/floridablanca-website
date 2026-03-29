@@ -1,8 +1,22 @@
+import type { Metadata } from "next";
 import Bubble from "@/components/Bubble";
 import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "À Propos - Le Chef Jean-Loup & FloridaBlanca",
+  description: "Découvrez l'histoire de FloridaBlanca et son chef Jean-Loup. Depuis 2017, rue Trivalle à Carcassonne, entre la Bastide et la Cité Médiévale. Tapas, cuisine méditerranéenne, terrasse, bar-restaurant et patio.",
+  alternates: {
+    canonical: "https://www.floridablanca.fr/apropos",
+  },
+  openGraph: {
+    title: "À Propos - FloridaBlanca Carcassonne",
+    description: "L'histoire de FloridaBlanca et son chef Jean-Loup depuis 2017. Trois espaces uniques : terrasse avec vue sur la Cité, bar-restaurant avec cuisine ouverte et patio.",
+    url: "https://www.floridablanca.fr/apropos",
+  },
+};
 
 function AboutPage() {
   return (
@@ -14,7 +28,7 @@ function AboutPage() {
         <div className="lg:w-3/5 w-5/6 flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-16">
           <img
             src="/worker.webp"
-            alt=""
+            alt="Jean-Loup, chef cuisinier du restaurant FloridaBlanca à Carcassonne"
             className="shadow-[-25px_25px_0_0_#002E6D] lg:w-1/2 w-5/6"
           />
           <div className="lg:w-1/2 flex flex-col lg:space-y-8">
@@ -87,7 +101,7 @@ function AboutPage() {
               <div className="lg:w-2/3">
                 <img
                   src="/moules.webp"
-                  alt=""
+                  alt="Tapas et fruits de mer servis en terrasse au FloridaBlanca, vue sur la Cité Médiévale de Carcassonne"
                   className="rotate-3 shadow-md hover:scale-105 duration-300"
                 />
               </div>
@@ -97,7 +111,7 @@ function AboutPage() {
               <div className="lg:w-2/3">
                 <img
                   src="/IMG_0225.webp"
-                  alt=""
+                  alt="Salle du bar-restaurant FloridaBlanca avec cuisine ouverte à Carcassonne"
                   className="-rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>
@@ -138,7 +152,7 @@ function AboutPage() {
               <div className="lg:w-2/3">
                 <img
                   src="/patio_new.webp"
-                  alt=""
+                  alt="Patio du restaurant FloridaBlanca, espace privatisable pour événements à Carcassonne"
                   className="rotate-3 shadow-md scale-75 hover:scale-90 duration-300"
                 />
               </div>

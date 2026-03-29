@@ -444,7 +444,7 @@ const ReservationForm = () => {
           <div className="lg:w-1/3 w-5/6 z-30">
             <img
               src="/IMG_0228.webp"
-              alt=""
+              alt="Salle du restaurant FloridaBlanca à Carcassonne - réservez votre table"
               className="shadow-[25px_15px_0_0_#002E6D] z-30"
             />
           </div>
@@ -452,6 +452,7 @@ const ReservationForm = () => {
           <img
             src="/top-octopus.webp"
             alt=""
+            aria-hidden="true"
             className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
           />
         </div>

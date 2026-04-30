@@ -99,6 +99,7 @@ const ReservationForm = () => {
   });
 
   const [succeeded, setSucceeded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
 
   const handleChange = (e: any) => {
@@ -193,6 +194,8 @@ const ReservationForm = () => {
 
     const formElement = formRef.current;
 
+    setIsLoading(true);
+
     Promise.all([
         emailjs.sendForm("service_floridablanca", "template_resa_001", formElement, "sCSQ7jBUlaWzqKf5_"),
         emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "sCSQ7jBUlaWzqKf5_")
@@ -203,6 +206,7 @@ const ReservationForm = () => {
     })
     .catch(error => {
         console.error("Erreur lors de l'envoi des emails :", error);
+        setIsLoading(false);
     });
 };
 
@@ -435,8 +439,15 @@ const ReservationForm = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer"
+              disabled={isLoading}
+              className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
+              {isLoading && (
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              )}
               {translation.submitButton}
             </button>
           </form>

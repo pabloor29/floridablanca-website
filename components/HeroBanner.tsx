@@ -43,10 +43,15 @@ function HeroBanner() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={textVariants}
-          className="z-10 text-white/90 font-spaceTransit lg:text-5xl text-2xl"
+          className="z-10 text-white/90 font-spaceTransit lg:text-5xl text-3xl"
         >
           Bar a poulpe. Tapas espagnols maison avec vins regionaux.
         </motion.h3>
+        <img
+          src="/img/guide-du-routard/recommande-par-guide-du-routard.webp"
+          alt="Recommandé par le Guide du Routard"
+          className="w-1/2 md:w-1/4 lg:w-1/5 mt-10"
+        />
       </div>
     </div>
   );

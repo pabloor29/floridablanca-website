@@ -105,7 +105,12 @@ function ContactPage() {
 
               <div className="flex flex-col items-center justify-center">
                 <p>Juillet - Aout</p>
-                <p>Lundi - Samedi </p>
+                <p>Lundi </p>
+                <p className="font-spaceTransit text-5xl">
+                  {" "}
+                  18:00 - 22:00
+                </p>
+                <p>Mardi - Samedi </p>
                 <p className="font-spaceTransit text-5xl">
                   {" "}
                   12:00 - 14:00 & 18:00 - 22:00
@@ -113,7 +118,9 @@ function ContactPage() {
               </div>
 
               <div className="flex flex-col items-center justify-center">
-                <p>Septembre - Juin</p>
+                <p>Septembre - Octobre</p>
+                <p>&</p>
+                <p>Mars - Juin</p>
                 <p>Mardi - Samedi </p>
                 <p className="font-spaceTransit text-5xl">
                   {" "}

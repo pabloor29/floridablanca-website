@@ -233,10 +233,15 @@ const ReservationForm = () => {
   return (
     <>
       {succeeded ? (
-        <div className="flex flex-col lg:flex-row w-full h-96 justify-center px-4 items-center lg:space-x-3 text-[#002E6D]">
-          <BadgeCheck />
-          <p className="text-xl italic text-center">
-            {translation.afterSentMessage}
+        <div className="flex flex-col w-full justify-center px-4 items-center py-20 gap-6 text-[#002E6D]">
+          <div className="flex flex-col lg:flex-row items-center gap-3">
+            <BadgeCheck />
+            <p className="text-xl italic text-center">
+              {translation.afterSentMessage}
+            </p>
+          </div>
+          <p className="text-sm text-center bg-yellow-50 border border-yellow-300 rounded-md px-5 py-3 max-w-md">
+            ⚠️ Pensez à vérifier vos <strong>courriers indésirables (spam)</strong> si vous ne recevez pas notre email de confirmation.
           </p>
         </div>
       ) : (

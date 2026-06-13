@@ -50,6 +50,9 @@ export async function POST(req: Request) {
       <p>Bonjour <strong>${fullName}</strong>,</p>
       <p>Nous avons bien reçu votre demande de réservation pour le <strong>${eventDate} à ${eventTime}</strong> (${numberOfGuests} couvert${Number(numberOfGuests) > 1 ? "s" : ""}).</p>
       <p>Votre réservation sera confirmée dans les plus brefs délais par email. Merci pour votre patience !</p>
+      <p style="background:#fef9c3;border:1px solid #fde047;padding:12px 16px;border-radius:6px;font-size:14px;">
+        ⚠️ <strong>Pensez à vérifier vos courriers indésirables (spam)</strong> si vous ne recevez pas notre email de confirmation.
+      </p>
       <p style="margin-top:32px;color:#6b7280;font-size:13px;">FloridaBlanca · 22 rue Trivalle, Carcassonne · 04 30 34 58 55</p>
     </div>
   `;

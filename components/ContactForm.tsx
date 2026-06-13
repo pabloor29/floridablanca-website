@@ -6,7 +6,6 @@ import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
-import emailjs from "@emailjs/browser";
 
 
 registerLocale("fr", fr);
@@ -101,6 +100,7 @@ const ReservationForm = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
+  const [eventDateTXT, setEventDateTXT] = useState("");
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -137,8 +137,6 @@ const ReservationForm = () => {
 
     setSucceeded(true);
   };
-
-  const [eventDateTXT, setEventDateTXT] = useState("");
 
   useEffect(() => {
     const dateInput = document.getElementById("datePicker");
@@ -184,31 +182,32 @@ const ReservationForm = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!formRef.current) {
-        console.error("Le formulaire n'est pas disponible !");
-        return;
-    }
-
-    const formElement = formRef.current;
-
     setIsLoading(true);
 
-    Promise.all([
-        emailjs.sendForm("service_floridablanca", "template_resa_001", formElement, "sCSQ7jBUlaWzqKf5_"),
-        emailjs.sendForm("service_floridablanca", "template_resa_002", formElement, "sCSQ7jBUlaWzqKf5_")
-    ])
-    .then(() => {
-        formRef.current?.reset();
-        setSucceeded(true);
-    })
-    .catch(error => {
-        console.error("Erreur lors de l'envoi des emails :", error);
-        setIsLoading(false);
-    });
-};
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          numberOfGuests: formData.numberOfGuests,
+          eventDate: eventDateTXT,
+          eventTime: selectedValue,
+          specialRequests: formData.specialRequests,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Erreur serveur");
+      setSucceeded(true);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi des emails :", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
     const [isOpen, setIsOpen] = useState(false); 
     const [selectedValue, setSelectedValue] = useState("");
@@ -245,14 +244,8 @@ const ReservationForm = () => {
           <form
             ref={formRef}
             onSubmit={sendEmail}
-            //onSubmit={handleSubmit}
             className="space-y-8 lg:w-1/3 w-5/6 z-20"
           >
-            <input type="hidden" name="eventDateTXT" value={eventDateTXT} />
-            <input type="hidden" name="company" value="FLORIDABLANCA" />
-            <input type="hidden" name="emailCompany" value="floridablanca22@gmail.com" />
-            <input type="hidden" name="reservationType" value="EN ATTENTE DE CONFIRMATION" />
-            <input type="hidden" name="reservationComment" value="Nous avons bien pris en compte votre demande et elle sera traitée dans les plus brefs délais. Veuillez noter que votre réservation ne sera confirmée qu’une fois que vous aurez reçu un mail de confirmation de notre part. Nous vous remercions pour votre patience et sommes impatients de vous accueillir !" />
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit leading-none">
                 {translation.title}

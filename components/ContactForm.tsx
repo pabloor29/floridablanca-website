@@ -23,13 +23,12 @@ const ReservationForm = () => {
       infoDateLabelSummer: "(Fermé dimanche et lundi midi)",
       infoDateLabelHollidays: "(Fermé en novembre, décembre, janvier et février)",
       eventTimeLabel: "Heure",
-
       specialRequestsLabel: "Demandes speciales",
       submitButton: "ENVOYER LA DEMANDE",
-
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
-
       alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
+      todayAfter19Message: "Il est passé 19h. Pour toute réservation le jour même, veuillez appeler le restaurant directement.",
+      callButton: "Appeler le restaurant",
     },
     en: {
       title: "Reservation request",
@@ -41,13 +40,12 @@ const ReservationForm = () => {
       infoDateLabelSummer: "(Closed on Sunday and Monday lunchtime)",
       infoDateLabelHollidays: "(Closed in November, December, January, and February)",
       eventTimeLabel: "Time",
-
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
-
       afterSentMessage: `Thank you for your booking request! A confirmation email will be sent to you shortly. Please check your mailbox.`,
-
       alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
+      todayAfter19Message: "It's past 7 PM. For same-day reservations, please call the restaurant directly.",
+      callButton: "Call the restaurant",
     },
     es: {
       title: "Solicitud de reserva",
@@ -59,13 +57,12 @@ const ReservationForm = () => {
       infoDateLabelSummer: "(Cerrado el domingo y el lunes al mediodía)",
       infoDateLabelHollidays: "(Cerrado en noviembre, diciembre, enero y febrero)",
       eventTimeLabel: "Hora",
-
       specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
-
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
-
       alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
+      todayAfter19Message: "Son más de las 19h. Para reservas en el día, llame directamente al restaurante.",
+      callButton: "Llamar al restaurante",
     },
     it: {
       title: "Richiesta di prenotazione",
@@ -77,13 +74,12 @@ const ReservationForm = () => {
       infoDateLabelSummer: "(Chiuso la domenica e il lunedì a pranzo)",
       infoDateLabelHollidays: "(Chiuso a novembre, dicembre, gennaio e febbraio)",
       eventTimeLabel: "Ora",
-
       specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
-
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
-
       alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
+      todayAfter19Message: "Sono passate le 19h. Per prenotazioni in giornata, chiamate direttamente il ristorante.",
+      callButton: "Chiama il ristorante",
     },
   };
 
@@ -101,6 +97,7 @@ const ReservationForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
   const [eventDateTXT, setEventDateTXT] = useState("");
+  const [showCallMessage, setShowCallMessage] = useState(false);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -336,9 +333,23 @@ const ReservationForm = () => {
                   required
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   onChange={(e) => {
-                    const newDate = new Date(e.target.value);
-                    setSelectedDate(newDate);       // ✅ met à jour la date sélectionnée
-                    setSelectedValue("");           // ✅ réinitialise l’horaire
+                    const val = e.target.value;
+                    if (!val) return;
+
+                    const now = new Date();
+                    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+                    if (val === todayStr && now.getHours() >= 19) {
+                      e.target.value = "";
+                      setShowCallMessage(true);
+                      setSelectedValue("");
+                      return;
+                    }
+
+                    setShowCallMessage(false);
+                    const newDate = new Date(val + "T12:00:00");
+                    setSelectedDate(newDate);
+                    setSelectedValue("");
                     setEventDateTXT(() => {
                       const day = newDate.getDate();
                       const month = newDate.getMonth() + 1;
@@ -348,7 +359,22 @@ const ReservationForm = () => {
                     });
                   }}
                 />
-                { selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
+                {showCallMessage ? (
+                  <div className="mt-3 bg-amber-50 border border-amber-300 rounded-md px-4 py-3 flex flex-col gap-3">
+                    <p className="text-sm text-amber-800 font-medium">
+                      {translation.todayAfter19Message}
+                    </p>
+                    <a
+                      href="tel:0430345855"
+                      className="inline-flex items-center justify-center gap-2 bg-[#002E6D] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#295DA6] duration-300"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      {translation.callButton}
+                    </a>
+                  </div>
+                ) : selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
                   <p className="absolute w-content text-sm pt-1">
                     {translation.infoDateLabelSummer}
                   </p>
@@ -356,12 +382,11 @@ const ReservationForm = () => {
                   <p className="absolute w-content text-sm pt-1">
                     {translation.infoDateLabelHollidays}
                   </p>
-                ):(
+                ) : (
                   <p className="absolute w-content text-sm pt-1">
                     {translation.infoDateLabel}
                   </p>
-                )
-                }
+                )}
               </div>
 
               <div className="relative lg:w-1/2 w-full">

@@ -1,4 +1,5 @@
 import { Instagram, Mail, Phone } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
@@ -68,11 +69,26 @@ function Footer() {
         </div>
       </div>
 
-      <a
-        href="https://www.cntl.digital/"
-        className="text-[#0A3C74] hover:underline py-2 text-xs w-full bg-[#e0ebff] flex justify-center items-center"
+      <nav
+        aria-label="Liens légaux"
+        className="w-full bg-[#e0ebff] py-3 px-4 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-[#0A3C74]"
       >
-        © This is a CNTL Digital creation - 2023
+        <Link href="/mentions-legales" className="hover:underline">
+          Mentions légales
+        </Link>
+        <Link href="/politique-confidentialite" className="hover:underline">
+          Politique de confidentialité
+        </Link>
+        <Link href="/cgu" className="hover:underline">
+          CGU
+        </Link>
+      </nav>
+
+      <a
+        href="https://resa-service.com"
+        className="text-[#0A3C74] hover:underline py-2 text-xs w-full bg-[#e0ebff] flex justify-center items-center border-t border-[#0A3C74]/10"
+      >
+        © This is a resa-service.com creation - 2023
       </a>
     </footer>
   );

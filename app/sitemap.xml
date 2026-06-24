@@ -48,4 +48,28 @@
     <priority>0.70</priority>
   </url>
 
+  <!-- Mentions légales -->
+  <url>
+    <loc>https://www.floridablanca.fr/mentions-legales</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- Politique de confidentialité -->
+  <url>
+    <loc>https://www.floridablanca.fr/politique-confidentialite</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- CGU -->
+  <url>
+    <loc>https://www.floridablanca.fr/cgu</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
 </urlset>

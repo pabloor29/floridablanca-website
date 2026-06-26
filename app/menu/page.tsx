@@ -1,7 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from "next";
 import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import FormulaPopup from "@/components/FormulaPopup";
+import { getMenuData, getMenuFileUrl } from "@/lib/menu";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -17,7 +21,15 @@ export const metadata: Metadata = {
   },
 };
 
-function MenuPage() {
+async function MenuPage() {
+  const categories = await getMenuData();
+
+  const menusCategory = categories.find((c) => c.name === "Menus");
+  const formuleCategory = categories.find((c) => c.name === "Formule du midi");
+
+  const menuImages = menusCategory?.files.map((f) => getMenuFileUrl(f.file_path)) ?? [];
+  const formuleImages = formuleCategory?.files.map((f) => getMenuFileUrl(f.file_path)) ?? [];
+
   return (
     <>
       <Navbar />
@@ -25,23 +37,21 @@ function MenuPage() {
 
       <div className="w-full flex justify-center items-center bg-[url('/carteETE2023-1.webp')]">
         <div className="lg:w-3/5 w-11/12 flex flex-col items-center justify-center py-20 space-y-6">
-          <img
-            className="w-full h-auto object-cover"
-            src="/carteETE2025-1.webp"
-            alt="Carte été 2025 FloridaBlanca - Tapas et entrées"
-          />
-          <img
-            className="w-full h-auto object-cover"
-            src="/carteETE2025-2.webp"
-            alt="Carte été 2025 FloridaBlanca - Plats et spécialités méditerranéennes"
-          />
-          <img
-            className="w-full h-auto object-cover"
-            src="/carteETE2025-3.webp"
-            alt="Carte été 2025 FloridaBlanca - Boissons et desserts"
-          />
+          {menuImages.map((src, i) => (
+            <img
+              key={i}
+              className="w-full h-auto object-cover"
+              src={src}
+              alt={`Carte FloridaBlanca ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
+
+      <FormulaPopup
+        images={formuleImages}
+        showFloatingButton={true}
+      />
 
       <Footer />
     </>

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from "next";
 import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
@@ -10,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Banknote, CreditCard, Coins, Ticket } from "lucide-react";
 import React from "react";
+import { getOpeningHours, DAYS_FR } from "@/lib/opening-hours";
 
 export const metadata: Metadata = {
   title: "Contact & Horaires - FloridaBlanca Carcassonne",
@@ -24,7 +27,9 @@ export const metadata: Metadata = {
   },
 };
 
-function ContactPage() {
+async function ContactPage() {
+  const hours = await getOpeningHours();
+
   return (
     <>
       <Navbar />
@@ -103,30 +108,32 @@ function ContactPage() {
                 horaires
               </h3>
 
-              <div className="flex flex-col items-center justify-center">
-                <p>Juillet - Aout</p>
-                <p>Lundi </p>
-                <p className="font-spaceTransit text-5xl">
-                  {" "}
-                  18:00 - 22:00
-                </p>
-                <p>Mardi - Samedi </p>
-                <p className="font-spaceTransit text-5xl">
-                  {" "}
-                  12:00 - 14:00 & 18:00 - 22:00
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center justify-center">
-                <p>Septembre - Octobre</p>
-                <p>&</p>
-                <p>Mars - Juin</p>
-                <p>Mardi - Samedi </p>
-                <p className="font-spaceTransit text-5xl">
-                  {" "}
-                  12:00 - 14:00 & 18:00 - 22:00
-                </p>
-              </div>
+              {hours ? (
+                <ul className="flex flex-col gap-2 w-full">
+                  {DAYS_FR.map((day, i) => {
+                    const d = hours[i];
+                    return (
+                      <li key={day} className="flex justify-between gap-8 text-base">
+                        <span className="font-bold">{day}</span>
+                        {d.closedDay ? (
+                          <span className="italic text-sm">Fermé</span>
+                        ) : (
+                          <div className="flex flex-col items-end">
+                            {!d.closedLunch && d.midi?.debut && (
+                              <span className="text-sm">{d.midi.debut} - {d.midi.fin}</span>
+                            )}
+                            {!d.closedDiner && d.soir?.debut && (
+                              <span className="text-sm">{d.soir.debut} - {d.soir.fin}</span>
+                            )}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p className="text-base">Horaires non disponibles</p>
+              )}
             </div>
           </div>
         </div>

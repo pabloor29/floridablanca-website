@@ -3,6 +3,7 @@ import CustomHeroBanner from "@/components/CustomHeroBanner";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
+import { getReservationConfig } from "@/lib/reservation";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -18,12 +19,21 @@ export const metadata: Metadata = {
   },
 };
 
-function ReservationPage() {
+async function ReservationPage() {
+  const config = await getReservationConfig();
+
   return (
     <>
       <Navbar />
       <CustomHeroBanner title="Reservation" img="/IMG_0221.webp" />
-      <ContactForm />
+      <ContactForm
+        closedWeekdays={config.closedWeekdays}
+        closedDates={config.closedDates}
+        holidayPeriods={config.holidayPeriods}
+        timeSlots={config.timeSlots}
+        lunchSlots={config.lunchSlots}
+        dinnerSlots={config.dinnerSlots}
+      />
       <Footer />
     </>
   );

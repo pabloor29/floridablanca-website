@@ -1,32 +1,44 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState , useEffect , useRef } from "react";
-import CustomTimePicker from "./CustomTimePicker";
+import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
-//import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { fr } from "date-fns/locale";
-
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
 
-const ReservationForm = () => {
+type Props = {
+  closedWeekdays: number[];
+  closedDates: string[];
+  holidayPeriods: { debut: string; fin: string }[];
+  timeSlots: string[];
+  lunchSlots: string[];
+  dinnerSlots: string[];
+};
+
+function toLocalDateStr(date: Date): string {
+  const y = date.getFullYear();
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const d = date.getDate().toString().padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots }: Props) => {
   const translations = {
     fr: {
       title: "Demande de reservation",
       fullNameLabel: "Nom complet",
       emailLabel: "Email",
+      phoneLabel: "Telephone",
       numberOfGuestsLabel: "Nombre de personnes",
       eventDateLabel: "Date",
-      infoDateLabel: "(Fermé lundi et dimanche)",
-      infoDateLabelSummer: "(Fermé dimanche et lundi midi)",
-      infoDateLabelHollidays: "(Fermé en novembre, décembre, janvier et février)",
       eventTimeLabel: "Heure",
       specialRequestsLabel: "Demandes speciales",
       submitButton: "ENVOYER LA DEMANDE",
       afterSentMessage: `Merci pour votre demande de réservation ! Un email de confirmation vous sera envoyé sous peu. Veuillez vérifier votre boîte mail.`,
-      alertRestaurantClose: "Restaurant fermé tous les lundis et dimanches.",
+      alertMaxNbGuests: "Pour toute réservation supérieure à 10 couverts, veuillez nous contacter à cette adresse mail : ",
       todayAfter19Message: "Il est passé 19h. Pour toute réservation le jour même, veuillez appeler le restaurant directement.",
       callButton: "Appeler le restaurant",
     },
@@ -34,16 +46,14 @@ const ReservationForm = () => {
       title: "Reservation request",
       fullNameLabel: "Full name",
       emailLabel: "Email",
+      phoneLabel: "Phone",
       numberOfGuestsLabel: "Number of people",
       eventDateLabel: "Date",
-      infoDateLabel: "(Closed on Monday and Sunday)",
-      infoDateLabelSummer: "(Closed on Sunday and Monday lunchtime)",
-      infoDateLabelHollidays: "(Closed in November, December, January, and February)",
       eventTimeLabel: "Time",
       specialRequestsLabel: "Special requests",
       submitButton: "SEND REQUEST",
       afterSentMessage: `Thank you for your booking request! A confirmation email will be sent to you shortly. Please check your mailbox.`,
-      alertRestaurantClose: "Restaurant closed every Monday and Sunday.",
+      alertMaxNbGuests: "For reservations of more than 10 covers, please contact us at this email address: ",
       todayAfter19Message: "It's past 7 PM. For same-day reservations, please call the restaurant directly.",
       callButton: "Call the restaurant",
     },
@@ -51,16 +61,14 @@ const ReservationForm = () => {
       title: "Solicitud de reserva",
       fullNameLabel: "Nombre completo",
       emailLabel: "Correo electronico",
+      phoneLabel: "Telefono",
       numberOfGuestsLabel: "Numero de personas",
       eventDateLabel: "Fecha",
-      infoDateLabel: "(Cerrado los lunes y domingos)",
-      infoDateLabelSummer: "(Cerrado el domingo y el lunes al mediodía)",
-      infoDateLabelHollidays: "(Cerrado en noviembre, diciembre, enero y febrero)",
       eventTimeLabel: "Hora",
       specialRequestsLabel: "Solicitudes especiales",
       submitButton: "ENVIAR SOLICITUD",
       afterSentMessage: `¡Gracias por su solicitud de reserva! Un correo electrónico de confirmación le será enviado en breve. Por favor, verifique su bandeja de entrada.`,
-      alertRestaurantClose: "Restaurante cerrado todos los lunes y domingos.",
+      alertMaxNbGuests: "Para reservas de más de 10 comensales, póngase en contacto con nosotros en esta dirección de correo electrónico: ",
       todayAfter19Message: "Son más de las 19h. Para reservas en el día, llame directamente al restaurante.",
       callButton: "Llamar al restaurante",
     },
@@ -68,120 +76,70 @@ const ReservationForm = () => {
       title: "Richiesta di prenotazione",
       fullNameLabel: "Nome completo",
       emailLabel: "Email",
+      phoneLabel: "Telefono",
       numberOfGuestsLabel: "Numero di persone",
       eventDateLabel: "Data",
-      infoDateLabel: "(Chiuso il lunedì e la domenica)",
-      infoDateLabelSummer: "(Chiuso la domenica e il lunedì a pranzo)",
-      infoDateLabelHollidays: "(Chiuso a novembre, dicembre, gennaio e febbraio)",
       eventTimeLabel: "Ora",
       specialRequestsLabel: "Richieste speciali",
       submitButton: "INVIA LA RICHIESTA",
       afterSentMessage: `Grazie per la tua richiesta di prenotazione! Una email di conferma ti sarà inviata a breve. Controlla la tua casella di posta.`,
-      alertRestaurantClose: "Ristorante chiuso tutti i lunedì e domeniche.",
+      alertMaxNbGuests: "Per prenotazioni superiori a 10 coperti, vi preghiamo di contattarci all'indirizzo e-mail: ",
       todayAfter19Message: "Sono passate le 19h. Per prenotazioni in giornata, chiamate direttamente il ristorante.",
       callButton: "Chiama il ristorante",
     },
   };
 
+  const [selectedLanguage, setSelectedLanguage] = useState("fr");
+  const translation = translations[selectedLanguage as keyof typeof translations];
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone: "",
     numberOfGuests: "",
     eventDate: new Date(),
     eventTime: "",
     specialRequests: "",
-    reservationType: "repas",
   });
 
   const [succeeded, setSucceeded] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("fr");
-  const [eventDateTXT, setEventDateTXT] = useState("");
-  const [showCallMessage, setShowCallMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-    console.log(formData.eventDate, formData.eventTime);
+    setFormData({ ...formData, [name]: value });
   };
 
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const isTodayBlocked = (): boolean => new Date().getHours() >= 19;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const isDateClosed = (date: Date): boolean => {
+    const isToday = toLocalDateStr(date) === toLocalDateStr(new Date());
+    if (isToday && isTodayBlocked()) return true;
 
-    const {
-      fullName,
-      email,
-      numberOfGuests,
-      eventDate,
-      eventTime,
-      specialRequests,
-      reservationType,
-    } = formData;
+    if (closedWeekdays.includes(date.getDay())) return true;
 
-    const mailTo = "floridablanca22@gmail.com";
-    const subject = `Table Reservation - Le ${eventDate} à ${eventTime}`;
-    const body = `Full Name: ${fullName}\nEmail: ${email}\nNumber of Guests: ${numberOfGuests}\nDate and Time: ${eventDate}, ${eventTime}\nSpecial Requests: ${specialRequests}\nReservation Type: ${reservationType}`;
+    const dateStr = toLocalDateStr(date);
+    if (closedDates.includes(dateStr)) return true;
 
-    window.location.href = `mailto:${mailTo}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    setSucceeded(true);
-  };
-
-  useEffect(() => {
-    const dateInput = document.getElementById("datePicker");
-
-    const handleDateChange = (e: any) => {
-      const date = new Date(e.target.value);
-      setSelectedDate(date);
-      const day = date.getDay();
-      const numDay = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-
-      const twoDigits = (num: number) => num.toString().padStart(2, "0");
-
-      setEventDateTXT(`${twoDigits(numDay)}-${twoDigits(month)}-${year}`);
-
-      if ((day == 0 && month == 7) || (day == 0 && month == 8))
-      {
-        e.target.value = "";
-      }
-      else if ((day === 0 || day === 1) && (month != 7) && (month != 8))
-      {
-        e.target.value = "";
-      }
-      else if (month == 11 || month == 12 || month == 1 || month == 2)
-      {
-        e.target.value = "";
-      }
-    };
-
-    if (dateInput)
-    {
-      dateInput.addEventListener("change", handleDateChange);
+    for (const period of holidayPeriods) {
+      if (dateStr >= period.debut && dateStr <= period.fin) return true;
     }
 
-    return () => {
-      if (dateInput)
-      {
-        dateInput.removeEventListener("change", handleDateChange);
-      }
-    };
-  }, []);
+    return false;
+  };
 
   const formRef = useRef<HTMLFormElement>(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsSubmitting(true);
+
+    const eventDateFormatted = selectedDate
+      ? selectedDate.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })
+      : "";
+
+    const eventDateISO = selectedDate ? toLocalDateStr(selectedDate) : "";
 
     try {
       const res = await fetch("/api/contact", {
@@ -190,8 +148,10 @@ const ReservationForm = () => {
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
+          phone: formData.phone,
           numberOfGuests: formData.numberOfGuests,
-          eventDate: eventDateTXT,
+          eventDate: eventDateFormatted,
+          eventDateISO,
           eventTime: selectedValue,
           specialRequests: formData.specialRequests,
         }),
@@ -202,33 +162,48 @@ const ReservationForm = () => {
     } catch (error) {
       console.error("Erreur lors de l'envoi des emails :", error);
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-    const [isOpen, setIsOpen] = useState(false); 
-    const [selectedValue, setSelectedValue] = useState("");
-  
-    const optionsTimeAllDay = ["12:00", "12:30", "13:00", "13:30", "14:00",
-                              "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
-                              ];
+  const [selectedValue, setSelectedValue] = useState("");
 
-    const optionsTimeHalfDayEvening = ["18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"
-                               ];
-  
-    const handleSelect = (value: string) => {
-      setSelectedValue(value);
-      setIsOpen(false);
-    };
-  
-    const toggleDropdown = () => {
-      setIsOpen((prev) => !prev);
-    };
-
-    const translation = translations[selectedLanguage as keyof typeof translations];
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+  };
 
   return (
     <>
+      <style jsx global>
+        {`
+          .date-past {
+            background-color: #f3f4f6 !important;
+            color: #9ca3af !important;
+            cursor: not-allowed !important;
+          }
+
+          .date-closed {
+            background-color: #fee2e2 !important;
+            color: #991b1b !important;
+            position: relative;
+          }
+
+          .date-closed::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 80%;
+            height: 2px;
+            background-color: #991b1b;
+            transform: translate(-50%, -50%) rotate(-45deg);
+          }
+
+          .react-datepicker__day--disabled {
+            cursor: not-allowed !important;
+          }
+        `}
+      </style>
       {succeeded ? (
         <div className="flex flex-col w-full justify-center px-4 items-center py-20 gap-6 text-[#002E6D]">
           <div className="flex flex-col lg:flex-row items-center gap-3">
@@ -242,11 +217,11 @@ const ReservationForm = () => {
           </p>
         </div>
       ) : (
-        <div className="relative flex flex-col lg:flex-row justify-center items-center lg:space-x-20 space-y-8 py-16">
+        <div className="relative flex flex-col lg:flex-row justify-center items-start lg:space-x-12 space-y-8 lg:space-y-0 py-16 px-4">
           <form
             ref={formRef}
             onSubmit={sendEmail}
-            className="space-y-8 lg:w-1/3 w-5/6 z-20"
+            className="space-y-8 lg:w-1/2 w-full max-w-2xl relative z-30"
           >
             <div className="flex items-center justify-between lg:flex-row flex-col-reverse">
               <h3 className="text-[#002E6D] text-7xl font-medium font-spaceTransit leading-none">
@@ -263,6 +238,7 @@ const ReservationForm = () => {
                 <option value="it">🇮🇹</option>
               </select>
             </div>
+
             <div>
               <label
                 htmlFor="fullName"
@@ -299,7 +275,35 @@ const ReservationForm = () => {
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-center md:items-end lg:space-x-10 space-y-8 lg:space-y-0">
+            <div>
+              <label
+                htmlFor="phone"
+                className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+              >
+                {translation.phoneLabel}
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                required
+              />
+            </div>
+
+            <div className="bg-[#002E6D]/80 p-2 text-white text-sm">
+              {translation.alertMaxNbGuests}
+              <a
+                href="mailto:floridablanca22@gmail.com"
+                className="text-blue-200 underline"
+              >
+                floridablanca22@gmail.com
+              </a>
+            </div>
+
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:space-x-10 space-y-8 lg:space-y-0">
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="numberOfGuests"
@@ -314,6 +318,7 @@ const ReservationForm = () => {
                   value={formData.numberOfGuests}
                   onChange={handleChange}
                   min={1}
+                  max={10}
                   className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
                   required
                 />
@@ -322,44 +327,28 @@ const ReservationForm = () => {
               <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="eventDate"
-                  className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
+                  className="w-full block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
                   {translation.eventDateLabel}
                 </label>
-                <input 
-                  type="date" 
-                  id="datePicker" 
-                  name="eventDate" 
-                  required
-                  className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (!val) return;
-
-                    const now = new Date();
-                    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-
-                    if (val === todayStr && now.getHours() >= 19) {
-                      e.target.value = "";
-                      setShowCallMessage(true);
-                      setSelectedValue("");
-                      return;
-                    }
-
-                    setShowCallMessage(false);
-                    const newDate = new Date(val + "T12:00:00");
-                    setSelectedDate(newDate);
-                    setSelectedValue("");
-                    setEventDateTXT(() => {
-                      const day = newDate.getDate();
-                      const month = newDate.getMonth() + 1;
-                      const year = newDate.getFullYear();
-                      const twoDigits = (n: number) => n.toString().padStart(2, "0");
-                      return `${twoDigits(day)}-${twoDigits(month)}-${year}`;
-                    });
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => date && setSelectedDate(date)}
+                  filterDate={(date) => !isDateClosed(date)}
+                  dayClassName={(date) => {
+                    const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
+                    if (isPast) return "date-past";
+                    if (isDateClosed(date)) return "date-closed";
+                    return "";
                   }}
+                  dateFormat="dd/MM/yyyy"
+                  locale="fr"
+                  minDate={isTodayBlocked() ? (() => { const d = new Date(); d.setDate(d.getDate() + 1); return d; })() : new Date()}
+                  placeholderText="Sélectionner une date"
+                  className="w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
+                  required
                 />
-                {showCallMessage ? (
+                {isTodayBlocked() && (
                   <div className="mt-3 bg-amber-50 border border-amber-300 rounded-md px-4 py-3 flex flex-col gap-3">
                     <p className="text-sm text-amber-800 font-medium">
                       {translation.todayAfter19Message}
@@ -368,78 +357,91 @@ const ReservationForm = () => {
                       href="tel:0430345855"
                       className="inline-flex items-center justify-center gap-2 bg-[#002E6D] text-white text-sm font-semibold px-4 py-2 rounded-md hover:bg-[#295DA6] duration-300"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      {translation.callButton}
+                      📞 {translation.callButton}
                     </a>
                   </div>
-                ) : selectedDate.getMonth() + 1 === 7 || selectedDate.getMonth() + 1 === 8 ? (
-                  <p className="absolute w-content text-sm pt-1">
-                    {translation.infoDateLabelSummer}
-                  </p>
-                ) : selectedDate.getMonth() + 1 === 11 || selectedDate.getMonth() + 1 === 12 || selectedDate.getMonth() + 1 === 1 || selectedDate.getMonth() + 1 === 2 ? (
-                  <p className="absolute w-content text-sm pt-1">
-                    {translation.infoDateLabelHollidays}
-                  </p>
-                ) : (
-                  <p className="absolute w-content text-sm pt-1">
-                    {translation.infoDateLabel}
-                  </p>
                 )}
               </div>
+            </div>
 
-              <div className="relative lg:w-1/2 w-full">
+            <div className="w-full">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-3">
                 <label
                   htmlFor="eventTime"
                   className="block text-lg font-medium text-[#002E6D] font-spaceTransit text-4xl tracking-wide"
                 >
                   {translation.eventTimeLabel}
                 </label>
-                <input
-                  type="text"
-                  name="eventTime"
-                  value={selectedValue}
-                  onClick={toggleDropdown}
-                  onChange={(e) => setSelectedValue(e.target.value)}
-                  className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
-                  placeholder="Choisir une option"
-                />
-                
-                {isOpen && 
-                (
-                  selectedDate.getDay() === 1 ? (
-                    <ul
-                      className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
-                      style={{ maxHeight: "200px", overflowY: "auto" }}
-                    >
-                      {optionsTimeHalfDayEvening.map((option, index) => (
-                        <li
-                          key={index}
-                          className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
-                          onClick={() => handleSelect(option)}
-                        >
-                          {option}
-                        </li>
-                      ))}
-                    </ul>
-                  ):(
-                    <ul
-                      className="absolute w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10"
-                      style={{ maxHeight: "200px", overflowY: "auto" }}
-                    >
-                      {optionsTimeAllDay.map((option, index) => (
-                        <li
-                          key={index}
-                          className="px-4 py-2 cursor-pointer hover:bg-indigo-100"
-                          onClick={() => handleSelect(option)}
-                        >
-                          {option}
-                        </li>
-                      ))}
-                    </ul>
-                  )
-                )}            
+                {selectedValue && (
+                  <span className="inline-flex items-center gap-2 self-start sm:self-auto bg-[#002E6D] text-white text-sm font-semibold px-3 py-1 rounded-full">
+                    Sélectionné : {selectedValue}
+                  </span>
+                )}
+              </div>
+              <input type="hidden" name="eventTime" value={selectedValue} required />
+
+              <div className="border border-[#597ba8] rounded-md p-3 sm:p-4 bg-white">
+                {lunchSlots.length === 0 && dinnerSlots.length === 0 ? (
+                  <p className="text-sm italic text-[#002E6D]/70 text-center py-4">
+                    Aucun créneau disponible
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    {lunchSlots.length > 0 && (
+                      <div>
+                        <div className="flex items-center gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
+                          <span aria-hidden>🌞</span>
+                          <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
+                            Midi
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
+                          {lunchSlots.map((option) => (
+                            <button
+                              type="button"
+                              key={`lunch-${option}`}
+                              onClick={() => handleSelect(option)}
+                              className={`px-2 py-1.5 rounded-md border text-sm transition ${
+                                selectedValue === option
+                                  ? "bg-[#002E6D] text-white border-[#002E6D]"
+                                  : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
+                              }`}
+                            >
+                              {option}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {dinnerSlots.length > 0 && (
+                      <div>
+                        <div className="flex items-center gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
+                          <span aria-hidden>🌙</span>
+                          <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
+                            Soir
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
+                          {dinnerSlots.map((option) => (
+                            <button
+                              type="button"
+                              key={`dinner-${option}`}
+                              onClick={() => handleSelect(option)}
+                              className={`px-2 py-1.5 rounded-md border text-sm transition ${
+                                selectedValue === option
+                                  ? "bg-[#002E6D] text-white border-[#002E6D]"
+                                  : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
+                              }`}
+                            >
+                              {option}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -455,31 +457,31 @@ const ReservationForm = () => {
                 name="specialRequests"
                 rows={4}
                 value={formData.specialRequests}
-                onChange={handleChange}
+                onChange={handleChange as React.ChangeEventHandler<HTMLTextAreaElement>}
                 className="mt-1 block w-full px-4 py-2 border border-[#597ba8] rounded-md focus:ring focus:ring-violet-200 focus:border-violet-500"
               />
             </div>
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isSubmitting}
               className="w-full bg-[#002E6D] rounded-sm py-3 text-lg font-semibold text-white hover:bg-[#295DA6] duration-300 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
-              {isLoading && (
+              {isSubmitting && (
                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
               )}
-              {translation.submitButton}
+              {isSubmitting ? "Envoi en cours..." : translation.submitButton}
             </button>
           </form>
 
-          <div className="lg:w-1/3 w-5/6 z-30">
+          <div className="lg:w-1/3 w-5/6 relative z-10 self-center lg:self-start lg:sticky lg:top-24">
             <img
               src="/IMG_0228.webp"
               alt="Salle du restaurant FloridaBlanca à Carcassonne - réservez votre table"
-              className="shadow-[25px_15px_0_0_#002E6D] z-30"
+              className="shadow-[25px_15px_0_0_#002E6D] w-full h-auto"
             />
           </div>
 
@@ -487,7 +489,7 @@ const ReservationForm = () => {
             src="/top-octopus.webp"
             alt=""
             aria-hidden="true"
-            className="absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
+            className="pointer-events-none absolute opacity-5 z-0 scale-150 top-20 lg:top-44 left-0 overflow-x-hidden"
           />
         </div>
       )}

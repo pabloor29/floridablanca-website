@@ -1,6 +1,6 @@
 "use client";
 import { BadgeCheck } from "lucide-react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -9,6 +9,8 @@ import { fr } from "date-fns/locale";
 registerLocale("fr", fr);
 setDefaultLocale("fr");
 
+type DayServices = { lunchOpen: boolean; dinnerOpen: boolean };
+
 type Props = {
   closedWeekdays: number[];
   closedDates: string[];
@@ -16,6 +18,7 @@ type Props = {
   timeSlots: string[];
   lunchSlots: string[];
   dinnerSlots: string[];
+  dayServices: DayServices[];
 };
 
 function toLocalDateStr(date: Date): string {
@@ -25,7 +28,7 @@ function toLocalDateStr(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots }: Props) => {
+const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots, dayServices }: Props) => {
   const translations = {
     fr: {
       title: "Demande de reservation",
@@ -171,6 +174,22 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
   const handleSelect = (value: string) => {
     setSelectedValue(value);
   };
+
+  const currentServices: DayServices = selectedDate
+    ? dayServices[selectedDate.getDay()] ?? { lunchOpen: true, dinnerOpen: true }
+    : { lunchOpen: true, dinnerOpen: true };
+
+  const lunchEnabled = !!selectedDate && currentServices.lunchOpen;
+  const dinnerEnabled = !!selectedDate && currentServices.dinnerOpen;
+
+  useEffect(() => {
+    if (!selectedValue) return;
+    const inLunch = lunchSlots.includes(selectedValue);
+    const inDinner = dinnerSlots.includes(selectedValue);
+    if ((inLunch && !lunchEnabled) || (inDinner && !dinnerEnabled)) {
+      setSelectedValue("");
+    }
+  }, [selectedDate, lunchEnabled, dinnerEnabled, selectedValue, lunchSlots, dinnerSlots]);
 
   return (
     <>
@@ -381,6 +400,11 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
               <input type="hidden" name="eventTime" value={selectedValue} required />
 
               <div className="border border-[#597ba8] rounded-md p-3 sm:p-4 bg-white">
+                {!selectedDate && (
+                  <p className="text-sm italic text-[#002E6D]/70 text-center pb-3 mb-3 border-b border-[#002E6D]/10">
+                    Sélectionnez d&apos;abord une date pour voir les créneaux disponibles.
+                  </p>
+                )}
                 {lunchSlots.length === 0 && dinnerSlots.length === 0 ? (
                   <p className="text-sm italic text-[#002E6D]/70 text-center py-4">
                     Aucun créneau disponible
@@ -388,55 +412,85 @@ const ReservationForm = ({ closedWeekdays, closedDates, holidayPeriods, timeSlot
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     {lunchSlots.length > 0 && (
-                      <div>
-                        <div className="flex items-center gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
-                          <span aria-hidden>🌞</span>
-                          <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
-                            Midi
-                          </p>
+                      <div className={lunchEnabled ? "" : "opacity-50"}>
+                        <div className="flex items-center justify-between gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
+                          <div className="flex items-center gap-2">
+                            <span aria-hidden>🌞</span>
+                            <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
+                              Midi
+                            </p>
+                          </div>
+                          {selectedDate && !currentServices.lunchOpen && (
+                            <span className="text-[10px] uppercase tracking-wider text-red-600 font-semibold">
+                              Fermé
+                            </span>
+                          )}
                         </div>
                         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
-                          {lunchSlots.map((option) => (
-                            <button
-                              type="button"
-                              key={`lunch-${option}`}
-                              onClick={() => handleSelect(option)}
-                              className={`px-2 py-1.5 rounded-md border text-sm transition ${
-                                selectedValue === option
-                                  ? "bg-[#002E6D] text-white border-[#002E6D]"
-                                  : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
-                              }`}
-                            >
-                              {option}
-                            </button>
-                          ))}
+                          {lunchSlots.map((option) => {
+                            const disabled = !lunchEnabled;
+                            const isSelected = selectedValue === option;
+                            return (
+                              <button
+                                type="button"
+                                key={`lunch-${option}`}
+                                onClick={() => !disabled && handleSelect(option)}
+                                disabled={disabled}
+                                aria-disabled={disabled}
+                                className={`px-2 py-1.5 rounded-md border text-sm transition ${
+                                  isSelected
+                                    ? "bg-[#002E6D] text-white border-[#002E6D]"
+                                    : disabled
+                                    ? "bg-gray-100 text-gray-400 border-gray-200 line-through cursor-not-allowed"
+                                    : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
+                                }`}
+                              >
+                                {option}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     )}
 
                     {dinnerSlots.length > 0 && (
-                      <div>
-                        <div className="flex items-center gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
-                          <span aria-hidden>🌙</span>
-                          <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
-                            Soir
-                          </p>
+                      <div className={dinnerEnabled ? "" : "opacity-50"}>
+                        <div className="flex items-center justify-between gap-2 mb-2 pb-1 border-b border-[#002E6D]/20">
+                          <div className="flex items-center gap-2">
+                            <span aria-hidden>🌙</span>
+                            <p className="text-xs font-bold uppercase tracking-wider text-[#002E6D]">
+                              Soir
+                            </p>
+                          </div>
+                          {selectedDate && !currentServices.dinnerOpen && (
+                            <span className="text-[10px] uppercase tracking-wider text-red-600 font-semibold">
+                              Fermé
+                            </span>
+                          )}
                         </div>
                         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2">
-                          {dinnerSlots.map((option) => (
-                            <button
-                              type="button"
-                              key={`dinner-${option}`}
-                              onClick={() => handleSelect(option)}
-                              className={`px-2 py-1.5 rounded-md border text-sm transition ${
-                                selectedValue === option
-                                  ? "bg-[#002E6D] text-white border-[#002E6D]"
-                                  : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
-                              }`}
-                            >
-                              {option}
-                            </button>
-                          ))}
+                          {dinnerSlots.map((option) => {
+                            const disabled = !dinnerEnabled;
+                            const isSelected = selectedValue === option;
+                            return (
+                              <button
+                                type="button"
+                                key={`dinner-${option}`}
+                                onClick={() => !disabled && handleSelect(option)}
+                                disabled={disabled}
+                                aria-disabled={disabled}
+                                className={`px-2 py-1.5 rounded-md border text-sm transition ${
+                                  isSelected
+                                    ? "bg-[#002E6D] text-white border-[#002E6D]"
+                                    : disabled
+                                    ? "bg-gray-100 text-gray-400 border-gray-200 line-through cursor-not-allowed"
+                                    : "bg-white text-[#002E6D] border-[#597ba8] hover:bg-[#002E6D]/10"
+                                }`}
+                              >
+                                {option}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     )}

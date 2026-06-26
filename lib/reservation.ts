@@ -2,6 +2,8 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { DayHours } from "./opening-hours";
 
+export type DayServices = { lunchOpen: boolean; dinnerOpen: boolean };
+
 export type ReservationConfig = {
   closedWeekdays: number[];
   closedDates: string[];
@@ -9,6 +11,7 @@ export type ReservationConfig = {
   timeSlots: string[];
   lunchSlots: string[];
   dinnerSlots: string[];
+  dayServices: DayServices[];
 };
 
 const DAYS_FR_TO_JS: Record<number, number> = {
@@ -60,8 +63,9 @@ export async function getReservationConfig(): Promise<ReservationConfig> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const restaurantId = process.env.RESTAURANT_ID;
+  const defaultDayServices: DayServices[] = Array.from({ length: 7 }, () => ({ lunchOpen: true, dinnerOpen: true }));
   if (!url || !key || !restaurantId) {
-    return { closedWeekdays: [], closedDates: [], holidayPeriods: [], timeSlots: [], lunchSlots: [], dinnerSlots: [] };
+    return { closedWeekdays: [], closedDates: [], holidayPeriods: [], timeSlots: [], lunchSlots: [], dinnerSlots: [], dayServices: defaultDayServices };
   }
 
   const supabase = createClient(url, key, {
@@ -85,9 +89,19 @@ export async function getReservationConfig(): Promise<ReservationConfig> {
   const schedule: ScheduleRow | null = (scheduleResult.data as ScheduleRow | null) ?? null;
 
   const closedWeekdays: number[] = [];
+  const dayServices: DayServices[] = Array.from({ length: 7 }, () => ({ lunchOpen: true, dinnerOpen: true }));
   if (hours) {
     hours.forEach((day, index) => {
-      if (day.closedDay) closedWeekdays.push(DAYS_FR_TO_JS[index]);
+      const jsDay = DAYS_FR_TO_JS[index];
+      if (day.closedDay) {
+        closedWeekdays.push(jsDay);
+        dayServices[jsDay] = { lunchOpen: false, dinnerOpen: false };
+      } else {
+        dayServices[jsDay] = {
+          lunchOpen: !day.closedLunch && !!day.midi?.debut && !!day.midi?.fin,
+          dinnerOpen: !day.closedDiner && !!day.soir?.debut && !!day.soir?.fin,
+        };
+      }
     });
   }
 
@@ -102,5 +116,5 @@ export async function getReservationConfig(): Promise<ReservationConfig> {
       : [];
   const timeSlots = Array.from(new Set([...lunchSlots, ...dinnerSlots])).sort();
 
-  return { closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots };
+  return { closedWeekdays, closedDates, holidayPeriods, timeSlots, lunchSlots, dinnerSlots, dayServices };
 }

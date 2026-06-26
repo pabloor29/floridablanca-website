@@ -20,21 +20,21 @@ export const DAYS_FR = [
 ];
 
 export async function getOpeningHours(): Promise<DayHours[] | null> {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      global: {
-        fetch: (url, options) =>
-          fetch(url, { ...options, cache: "no-store" }),
-      },
-    }
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const restaurantId = process.env.RESTAURANT_ID;
+  if (!url || !key || !restaurantId) return null;
+
+  const supabase = createClient(url, key, {
+    global: {
+      fetch: (u, options) => fetch(u, { ...options, cache: "no-store" }),
+    },
+  });
 
   const { data, error } = await supabase
     .from("opening_hours")
     .select("hours")
-    .eq("restaurant_id", process.env.RESTAURANT_ID!)
+    .eq("restaurant_id", restaurantId)
     .single();
 
   if (error || !data) return null;

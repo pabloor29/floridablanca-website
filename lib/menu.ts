@@ -15,21 +15,20 @@ export type MenuCategory = {
 };
 
 function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      global: {
-        fetch: (url, options) =>
-          fetch(url, { ...options, cache: "no-store" }),
-      },
-    }
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    global: {
+      fetch: (u, options) => fetch(u, { ...options, cache: "no-store" }),
+    },
+  });
 }
 
 export async function getMenuData(): Promise<MenuCategory[]> {
   const supabase = getSupabase();
-  const restaurantId = process.env.RESTAURANT_ID!;
+  const restaurantId = process.env.RESTAURANT_ID;
+  if (!supabase || !restaurantId) return [];
 
   const { data: categories } = await supabase
     .from("menu_categories")

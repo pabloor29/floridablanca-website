@@ -57,13 +57,16 @@ type ScheduleRow = {
 };
 
 export async function getReservationConfig(): Promise<ReservationConfig> {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { global: { fetch: (url, opts) => fetch(url, { ...opts, cache: "no-store" }) } }
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const restaurantId = process.env.RESTAURANT_ID;
+  if (!url || !key || !restaurantId) {
+    return { closedWeekdays: [], closedDates: [], holidayPeriods: [], timeSlots: [], lunchSlots: [], dinnerSlots: [] };
+  }
 
-  const restaurantId = process.env.RESTAURANT_ID!;
+  const supabase = createClient(url, key, {
+    global: { fetch: (u, opts) => fetch(u, { ...opts, cache: "no-store" }) },
+  });
 
   const [hoursResult, closedDaysResult, holidaysResult, scheduleResult] = await Promise.all([
     supabase.from("opening_hours").select("hours").eq("restaurant_id", restaurantId).single(),

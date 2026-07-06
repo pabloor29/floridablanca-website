@@ -45,7 +45,7 @@ function PlatCursorEffect() {
         </div>
 
         <div className="lg:w-1/2 w-5/6">
-          <img src="/IMG_0222.webp" alt="Ambiance du restaurant FloridaBlanca à Carcassonne, tapas et spécialités méditerranéennes" />
+          <img src="/patio_new.webp" alt="Ambiance du restaurant FloridaBlanca à Carcassonne, tapas et spécialités méditerranéennes" />
         </div>
 
         <img

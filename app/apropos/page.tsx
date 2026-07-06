@@ -135,7 +135,7 @@ function AboutPage() {
             <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-16 space-y-8">
               <div className="lg:w-1/3 flex flex-col space-y-8 lg:text-right text-center">
                 <h3 className="text-5xl font-medium font-spaceTransit">
-                  Le patio
+                  Le patio couvert
                 </h3>
                 <article className="text-justify lg:text-right">
                   Notre patio est l'endroit idéal pour organiser des événements

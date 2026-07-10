@@ -69,12 +69,13 @@ function IntroRestaurant() {
           className="lg:w-1/2 w-5/6 flex flex-col space-y-8"
         >
           <h3 className="text-[#002E6D] text-5xl font-medium font-spaceTransit leading-none">
-            Restaurant de Tapas Specialites Espagnoles
+            Restaurant de Tapas & Bar a Poulpe a Carcassonne
           </h3>
           <article className="text-[#274b7e] text-justify lg:text-left">
-            Petit restaurant espagnol au pied de la cité nous proposons une
-            carte variée de tapas et de plats avec une belle sélection de vins
-            locaux.
+            Petit restaurant espagnol rue Trivalle, au pied de la Cité de
+            Carcassonne, nous proposons une carte variée de tapas maison, poulpe,
+            moules frites et plats à partager, avec une belle sélection de vins
+            régionaux.
           </article>
           <Link
             href="/apropos"

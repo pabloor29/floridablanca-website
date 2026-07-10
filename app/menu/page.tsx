@@ -10,7 +10,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "Menu & Carte - Tapas et Cuisine Méditerranéenne",
-  description: "Découvrez la carte du restaurant FloridaBlanca à Carcassonne : tapas, encornets, padrons, pika-pika de bœuf, calçots, vins et boissons. Menu été 2025.",
+  description: "Découvrez la carte du restaurant FloridaBlanca à Carcassonne : tapas, poulpe, encornets, moules frites, padrons, pika-pika de bœuf, calçots, vins régionaux et boissons. Menu été 2026.",
   alternates: {
     canonical: "https://www.floridablanca.fr/menu",
   },
